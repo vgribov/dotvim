@@ -148,3 +148,6 @@ map <silent><leader>ct :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q
 map <silent><leader>m :wa<CR>:make!<CR>
 map <silent><leader>mc :make! clean<CR>
 
+if filereadable(".vim.custom")
+    so .vim.custom
+endif
