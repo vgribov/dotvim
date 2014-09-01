@@ -4,8 +4,8 @@ if v:progname =~? "evim"
 endif
 
 set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+set ruler		    " show the cursor position all the time
+set showcmd		    " display incomplete commands
 set incsearch		" do incremental searching
 set nocompatible
 set number
@@ -13,6 +13,9 @@ set nowrap
 set smartindent
 set expandtab
 set hidden
+
+" no folds closed when a buffer is opened is
+set foldlevelstart=99
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -113,6 +116,7 @@ inoremap " ""<Left>
 
 " Tagbar settings
 let tagbar_compact = 1
+let tagbar_autoclose = 1
 let tagbar_type_objc = {
     \ 'ctagstype': 'ObjectiveC',
     \ 'kinds' : [
@@ -142,7 +146,7 @@ au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Building the Ctags database
-map <silent><leader>ct :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c,c++<CR>
+map <silent><leader>tg :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++,ObjectiveC<CR>
 
 " Make
 map <silent><leader>m :wa<CR>:make!<CR>
