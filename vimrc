@@ -82,9 +82,9 @@ filetype plugin on
 
 " Buffers navigation
 nmap <C-^> :b!#<CR>
-nmap <C-h> :bp!<CR>
-nmap <C-l> :bn!<CR>
-nmap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+"nmap <C-h> :bp!<CR>
+"nmap <C-l> :bn!<CR>
+"nmap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Quickfix navigation
 nmap <leader>cn :cnext<CR>
@@ -146,7 +146,7 @@ au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Building the Ctags database
-map <silent><leader>tg :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++,ObjectiveC<CR>
+map <silent><leader>tg :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++,ObjectiveC .<CR>
 
 " Make
 map <silent><leader>m :wa<CR>:make!<CR>
