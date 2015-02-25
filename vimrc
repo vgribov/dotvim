@@ -1,13 +1,33 @@
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
+set nocompatible
+filetype off
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'tomasr/molokai'
+Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'vadimr/bclose.vim'
+Plugin 'vim-scripts/LustyJuggler'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/OmniCppComplete'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+filetype plugin on
+
+set ignorecase
 set history=50		" keep 50 lines of command line history
 set ruler		    " show the cursor position all the time
 set showcmd		    " display incomplete commands
 set incsearch		" do incremental searching
-set nocompatible
 set number
 set nowrap
 set smartindent
@@ -15,7 +35,9 @@ set expandtab
 set hidden
 
 " no folds closed when a buffer is opened is
-set foldlevelstart=99
+set foldmethod=indent " Lines with equal indent form a fold
+set foldcolumn=2      " Display column indicating open/closed folds
+set foldlevel=99      " Default to no folds closed
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -27,7 +49,9 @@ else
 endif
 
 " Setup colorscheme
-" let g:molokai_original = 1
+set term=xterm-256color
+set t_Co=256
+let g:molokai_original = 1
 colo molokai
 hi NonText guifg=bg
 
@@ -78,13 +102,12 @@ au FileType markdown,textile setlocal spell spelllang=ru_ru,en_us|setlocal lineb
 au BufRead,BufNewFile *.txt setlocal linebreak
 
 let xml_use_xhtml = 1
-filetype plugin on
 
 " Buffers navigation
 nmap <C-^> :b!#<CR>
+nmap <leader>bd :Bclose<CR>
 "nmap <C-h> :bp!<CR>
 "nmap <C-l> :bn!<CR>
-"nmap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Quickfix navigation
 nmap <leader>cn :cnext<CR>
@@ -145,8 +168,22 @@ au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" OmniCpp configuration
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
 " Building the Ctags database
-map <silent><leader>tg :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++,ObjectiveC .<CR>
+map <silent><leader>tg :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++ .<CR>
+"au BufWritePost *.c,*.cpp,*.h,*.hpp silent! !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++ &
 
 " Make
 map <silent><leader>m :wa<CR>:make!<CR>
