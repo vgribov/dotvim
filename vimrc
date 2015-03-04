@@ -16,14 +16,13 @@ Plugin 'godlygeek/tabular'
 Plugin 'vadimr/bclose.vim'
 Plugin 'vim-scripts/LustyJuggler'
 Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'Rip-Rip/clang_complete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 filetype plugin on
 
-set ignorecase
 set history=50		" keep 50 lines of command line history
 set ruler		    " show the cursor position all the time
 set showcmd		    " display incomplete commands
@@ -168,25 +167,17 @@ au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" OmniCpp configuration
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+let g:clang_library_path = "/usr/local/llvm/bin/cygclang.dll"
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'clang_complete'
 
-" Building the Ctags database
-map <silent><leader>tg :wa<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++ .<CR>
-"au BufWritePost *.c,*.cpp,*.h,*.hpp silent! !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=C,C++ &
+set completeopt=menu,longest
+
+" Consider all .redmine files as Redmine wiki files.
+au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
 " Make
-map <silent><leader>m :wa<CR>:make!<CR>
+map <silent><leader>m :wa<CR>:make! -j4<CR>
 map <silent><leader>mc :make! clean<CR>
 
 if filereadable(".vim.custom")
