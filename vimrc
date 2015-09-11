@@ -16,7 +16,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'vadimr/bclose.vim'
 Plugin 'vim-scripts/LustyJuggler'
 Plugin 'majutsushi/tagbar'
-Plugin 'Rip-Rip/clang_complete'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Rip-Rip/clang_complete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -167,9 +168,15 @@ au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-let g:clang_library_path = "/usr/local/llvm/bin/cygclang.dll"
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'clang_complete'
+"let g:clang_library_path = "/usr/local/llvm/bin/cygclang.dll"
+"let g:clang_snippets = 1
+"let g:clang_snippets_engine = 'clang_complete'
+
+" YouCompleteteMe
+
+:nmap <silent><leader>gt :YcmCompleter GoTo<cr>
+:nmap <silent><leader>gdf :YcmCompleter GoToDefinition<cr>
+:nmap <silent><leader>gdc :YcmCompleter GoToDeclaration<cr>
 
 set completeopt=menu,longest
 
