@@ -184,8 +184,13 @@ set completeopt=menu,longest
 au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
 " Make
-map <silent><leader>m :wa<CR>:make! -j4<CR>
-map <silent><leader>mc :make! clean<CR>
+nmap <silent><leader>m :wa<CR>:make! -j4<CR>
+nmap <silent><leader>mc :make! clean<CR>
+
+" Find
+set grepprg=~/.vim/pgrep\ -snw\ $*
+nmap <silent><leader>f :execute "lgrep! ".expand("<cword>")." *.".expand("%:e") <bar> lw<cr>
+
 
 if filereadable(".vim.custom")
     so .vim.custom
