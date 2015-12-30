@@ -1,5 +1,5 @@
 if has('gui_gtk2')
-  set guifont=Monospace\ 9
+  set guifont=Menlo\ 9
 elseif has('win32') || has('win64')
   set guifont=Consolas:h9
 else

@@ -14,9 +14,12 @@ Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'vadimr/bclose.vim'
-Plugin 'vim-scripts/LustyJuggler'
+"Plugin 'vim-scripts/LustyJuggler'
 Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'ap/vim-buftabline'
+Plugin 'will133/vim-dirdiff'
+Plugin 'lambdalisue/vim-fullscreen'
 "Plugin 'Rip-Rip/clang_complete'
 
 " All of your Plugins must be added before the following line
@@ -36,24 +39,20 @@ set hidden
 
 " no folds closed when a buffer is opened is
 set foldmethod=indent " Lines with equal indent form a fold
-set foldcolumn=2      " Display column indicating open/closed folds
+set foldcolumn=0      " Display column indicating open/closed folds
 set foldlevel=99      " Default to no folds closed
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
+set backupdir=./.backup,.,/tmp
+set directory=.,./.backup,/tmp
 
 " Setup colorscheme
-set term=xterm-256color
+"set term=xterm-256color
 set t_Co=256
 let g:molokai_original = 1
 colo molokai
-hi NonText guifg=bg
 
 " Always show the statusline
 set laststatus=2
@@ -106,13 +105,14 @@ let xml_use_xhtml = 1
 " Buffers navigation
 nmap <C-^> :b!#<CR>
 nmap <leader>bd :Bclose<CR>
-"nmap <C-h> :bp!<CR>
-"nmap <C-l> :bn!<CR>
+nmap <leader>bc :Bclose!<CR>
+nmap <C-P> :bp!<CR>
+nmap <C-N> :bn!<CR>
 
-" Quickfix navigation
-nmap <leader>cn :cnext<CR>
-nmap <leader>cp :cprevious<CR>
-"set makeprg=makepp
+" Switching between source and header file
+map <leader>oc :e %<.c<CR>
+map <leader>oC :e %<.cpp<CR>
+map <leader>oh :e %<.h<CR>
 
 " lhs comments
 map <leader># :s/^/#/<CR>:noh<CR>
@@ -173,10 +173,15 @@ au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType 
 "let g:clang_snippets_engine = 'clang_complete'
 
 " YouCompleteteMe
-
-:nmap <silent><leader>gt :YcmCompleter GoTo<cr>
-:nmap <silent><leader>gdf :YcmCompleter GoToDefinition<cr>
-:nmap <silent><leader>gdc :YcmCompleter GoToDeclaration<cr>
+nmap <silent><leader>gt :YcmCompleter GoTo<cr>
+nmap <silent><leader>gdf :YcmCompleter GoToDefinition<cr>
+nmap <silent><leader>gdc :YcmCompleter GoToDeclaration<cr>
+nmap <silent><leader>ty :YcmCompleter GetType<cr>
+let g:ycm_min_num_of_chars_for_completion = 99
+let g:ycm_auto_trigger = 0
+let g:ycm_error_symbol = '✘'
+let g:ycm_warning_symbol = '✗'
+hi YcmErrorSign guibg=bg ctermbg=bg
 
 set completeopt=menu,longest
 
@@ -184,14 +189,17 @@ set completeopt=menu,longest
 au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
 " Make
-nmap <silent><leader>m :wa<CR>:make! -j4<CR>
-nmap <silent><leader>mc :make! clean<CR>
+nmap <silent><leader>m :wa<cr>:lmake!<cr>
+nmap <silent><leader>mc :lmake! clean<cr>
 
 " Find
 set grepprg=~/.vim/pgrep\ -snw\ $*
-nmap <silent><leader>f :execute "lgrep! ".expand("<cword>")." *.".expand("%:e") <bar> lw<cr>
+nmap <silent><leader>f :execute "lgrep! ".expand("<cword>")." '*.".expand("%:e")."'" <bar> lw<cr>
 
 
 if filereadable(".vim.custom")
     so .vim.custom
 endif
+
+hi NonText guifg=bg ctermfg=bg
+hi VertSplit guibg=bg ctermbg=bg
