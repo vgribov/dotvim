@@ -11,16 +11,17 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tomasr/molokai'
-Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'vadimr/bclose.vim'
-"Plugin 'vim-scripts/LustyJuggler'
 Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'ap/vim-buftabline'
 Plugin 'will133/vim-dirdiff'
 Plugin 'lambdalisue/vim-fullscreen'
-"Plugin 'Rip-Rip/clang_complete'
+Plugin 'vimwiki/vimwiki.git'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimfiler.vim'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -31,7 +32,7 @@ set history=50		" keep 50 lines of command line history
 set ruler		    " show the cursor position all the time
 set showcmd		    " display incomplete commands
 set incsearch		" do incremental searching
-set number
+set nonumber
 set nowrap
 set smartindent
 set expandtab
@@ -106,8 +107,8 @@ let xml_use_xhtml = 1
 nmap <C-^> :b!#<CR>
 nmap <leader>bd :Bclose<CR>
 nmap <leader>bc :Bclose!<CR>
-nmap <C-P> :bp!<CR>
-nmap <C-N> :bn!<CR>
+"nmap <C-h> :bp!<CR>
+"nmap <C-l> :bn!<CR>
 
 " Switching between source and header file
 map <leader>oc :e %<.c<CR>
@@ -157,16 +158,15 @@ let tagbar_type_objc = {
     \]
     \}
 
-" Mappings
-nmap <silent><leader>ex :NERDTreeToggle<CR>
 nmap <silent><leader>tb :TagbarToggle<CR>
 
 " Open NERDTree when vim starts up if no files were specified
-au StdinReadPre * let s:std_in=1
-au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"nmap <silent><leader>ex :NERDTreeToggle<CR>
+"au StdinReadPre * let s:std_in=1
+"au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Close vim if the only window left open is a NERDTree
-au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 "let g:clang_library_path = "/usr/local/llvm/bin/cygclang.dll"
 "let g:clang_snippets = 1
@@ -188,14 +188,79 @@ set completeopt=menu,longest
 " Consider all .redmine files as Redmine wiki files.
 au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
+" VimWiki configuration
+let g:vimwiki_dir_link = 'index'
+
+let vimwiki_path='$HOME/seva.grbv@gmail.com/vimwiki/'
+let vimwiki_export_path='$HOME/seva.grbv@gmail.com/vimwiki/html/'
+let wiki_settings={
+    \ 'template_path': vimwiki_export_path.'vimwiki-assets/',
+    \ 'template_default': 'default',
+    \ 'template_ext': '.html',
+    \ 'auto_export': 0,
+    \ 'nested_syntaxes': { 'c': 'c', 'c++': 'cpp', 'sh': 'sh' }
+\ }
+
+let wikis=["personal"]
+let g:vimwiki_list = []
+for wiki_name in wikis
+    let wiki=copy(wiki_settings)
+    let wiki.path = vimwiki_path.wiki_name.'/'
+    let wiki.path_html = vimwiki_export_path.wiki_name.'/'
+    let wiki.diary_index = 'index'
+    let wiki.diary_rel_path = 'diary/'
+    call add(g:vimwiki_list, wiki)
+endfor
+
 " Make
 nmap <silent><leader>m :wa<cr>:lmake!<cr>
 nmap <silent><leader>mc :lmake! clean<cr>
 
-" Find
-set grepprg=~/.vim/pgrep\ -snw\ $*
-nmap <silent><leader>f :execute "lgrep! ".expand("<cword>")." '*.".expand("%:e")."'" <bar> lw<cr>
+" CtrlP
+"let g:ctrlp_map = '<leader>f'
+"nmap <leader>r :CtrlPRoot<CR>
+"nmap <leader>l :CtrlPBuffer<CR>
 
+" Find
+"nmap <silent><leader>s :execute "Ack! ".expand("<cword>") <cr>
+
+"set grepprg=~/.vim/pgrep\ -snw\ $*
+"nmap <silent><leader>f :execute "lgrep! ".expand("<cword>")." '*.".expand("%:e")."'" <bar> lw<cr>
+
+" Unite
+let g:unite_source_history_yank_enable = 1
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
+nnoremap <leader>l :<C-u>Unite -no-split -buffer-name=buffer -quick-match buffer<cr>
+nnoremap <leader>. :<C-u>UniteResume<cr>
+
+" Unit find
+nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.<cr>
+
+" VimFiler
+let g:vimfiler_as_default_explorer = 1
+
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+
+nmap <leader>ex :VimFiler -explorer<cr>
+
+" Open a vimfiler buffer automatically when Vim starts up if no files were
+" specified
+autocmd VimEnter * if !argc() | VimFiler -explorer | endif
+
+" Open NERDTree when vim starts up if no files were specified
+"nmap <silent><leader>ex :NERDTreeToggle<CR>
+"au StdinReadPre * let s:std_in=1
+"au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" Close vim if the only window left open is a NERDTree
+"au BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 if filereadable(".vim.custom")
     so .vim.custom
@@ -203,3 +268,5 @@ endif
 
 hi NonText guifg=bg ctermfg=bg
 hi VertSplit guibg=bg ctermbg=bg
+
+runtime! ftplugin/man.vim

@@ -1,6 +1,5 @@
 setlocal cindent
 setlocal foldmethod=syntax
-setlocal foldcolumn=5
+setlocal foldcolumn=0
 setlocal syntax=c.doxygen
-
-inoremap <buffer> ( (  )<left><left>
+setlocal number
