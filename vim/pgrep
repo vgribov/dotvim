@@ -1,6 +1,0 @@
-#!/bin/bash
-
-file_pattern="${!#}"
-end=$(($# - 1))
-
-find . -type f -iname "${file_pattern}"  | parallel -k -j150% -m grep ${@:1:$end}
