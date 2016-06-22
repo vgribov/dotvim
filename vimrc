@@ -22,6 +22,9 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimfiler.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'vim-utils/vim-man'
+Plugin 'mtth/scratch.vim'
+Plugin 'hrj/vim-DrawIt'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -37,6 +40,8 @@ set nowrap
 set smartindent
 set expandtab
 set hidden
+
+set diffopt=filler,vertical
 
 " no folds closed when a buffer is opened is
 set foldmethod=indent " Lines with equal indent form a fold
@@ -190,6 +195,7 @@ au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
 " VimWiki configuration
 let g:vimwiki_dir_link = 'index'
+let g:vimwiki_table_auto_fmt = 0
 
 let vimwiki_path='$HOME/seva.grbv@gmail.com/vimwiki/'
 let vimwiki_export_path='$HOME/seva.grbv@gmail.com/vimwiki/html/'
@@ -213,8 +219,12 @@ for wiki_name in wikis
 endfor
 
 " Make
-nmap <silent><leader>m :wa<cr>:lmake!<cr>
-nmap <silent><leader>mc :lmake! clean<cr>
+nmap <silent><leader>m :wa<cr>:make!<cr>
+nmap <silent><leader>mc :make! clean<cr>
+
+" Change dir to a current file
+nmap <leader>cd :cd %:p:h<cr>:pwd<cr>
+
 
 " CtrlP
 "let g:ctrlp_map = '<leader>f'
@@ -230,14 +240,14 @@ nmap <silent><leader>mc :lmake! clean<cr>
 " Unite
 let g:unite_source_history_yank_enable = 1
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file<cr>
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
 nnoremap <leader>l :<C-u>Unite -no-split -buffer-name=buffer -quick-match buffer<cr>
 nnoremap <leader>. :<C-u>UniteResume<cr>
 
 " Unit find
-nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.<cr>
+nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
+nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
 
 " VimFiler
 let g:vimfiler_as_default_explorer = 1
@@ -252,7 +262,7 @@ nmap <leader>ex :VimFiler -explorer<cr>
 
 " Open a vimfiler buffer automatically when Vim starts up if no files were
 " specified
-autocmd VimEnter * if !argc() | VimFiler -explorer | endif
+"autocmd VimEnter * if !argc() | VimFiler -explorer | endif
 
 " Open NERDTree when vim starts up if no files were specified
 "nmap <silent><leader>ex :NERDTreeToggle<CR>
@@ -268,5 +278,3 @@ endif
 
 hi NonText guifg=bg ctermfg=bg
 hi VertSplit guibg=bg ctermbg=bg
-
-runtime! ftplugin/man.vim
