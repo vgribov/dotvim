@@ -1,7 +1,8 @@
+set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.config/nvim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -9,7 +10,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tomasr/molokai'
 Plugin 'godlygeek/tabular'
 Plugin 'vadimr/bclose.vim'
 Plugin 'majutsushi/tagbar'
@@ -41,8 +41,9 @@ filetype plugin indent on    " required
 syntax on
 colorscheme Tomorrow-Night
 
+set hlsearch
+
 set colorcolumn=80
-set number
 
 " Keep more info in memory to speed things up
 set hidden
@@ -56,11 +57,21 @@ set shiftwidth=4
 set expandtab
 set smartindent
 set autoindent
+set showcmd		    " display incomplete commands
+set incsearch		" do incremental searching
 
 set diffopt=filler,vertical
 
+" no folds closed when a buffer is opened is
+set foldmethod=indent " Lines with equal indent form a fold
+set foldcolumn=0      " Display column indicating open/closed folds
+set foldlevel=99      " Default to no folds closed
+
 " Show matching parenthesis
 set showmatch
+
+" Always show the statusline
+set laststatus=2
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -130,9 +141,10 @@ nmap <silent><leader>tb :TagbarToggle<CR>
 
 " YouCompleteteMe
 nmap <silent><leader>gt :YcmCompleter GoTo<cr>
-nmap <silent><leader>gdf :YcmCompleter GoToDefinition<cr>
-nmap <silent><leader>gdc :YcmCompleter GoToDeclaration<cr>
-nmap <silent><leader>ty :YcmCompleter GetType<cr>
+nmap <silent><leader>yg :YcmCompleter GoToDefinition<cr>
+nmap <silent><leader>yd :YcmCompleter GoToDeclaration<cr>
+nmap <silent><leader>yt :YcmCompleter GetType<cr>
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_auto_trigger = 0
 let g:ycm_error_symbol = '✘'
@@ -199,8 +211,37 @@ let g:vimfiler_marked_file_icon = '*'
 
 nmap <leader>ex :VimFiler -explorer<cr>
 
-if filereadable(".vim.custom")
-    so .vim.custom
+" Cscope
+if has('cscope')
+    "" Use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    set cscopetag
+
+    if has('quickfix')
+        set cscopequickfix=s-,c-,d-,i-,t-,e-
+    endif
+
+    " Check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    set csto=0
+
+    " show msg when any other cscope db added
+    set cscopeverbose  
+
+    " To do the first type of search, hit 'CTRL-\', followed by one of the
+    " cscope search types above (s,g,c,t,e,f,i,d). 
+    "
+    nmap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>	
+endif
+
+if filereadable(".vim")
+    so .vim
 endif
 
 hi NonText guifg=bg ctermfg=bg
