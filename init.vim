@@ -14,7 +14,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'vadimr/bclose.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'vimwiki/vimwiki.git'
 Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimfiler.vim'
@@ -40,6 +39,10 @@ filetype plugin indent on    " required
 
 syntax on
 colorscheme Tomorrow-Night
+
+" Enable mouse support
+set mouse=a
+set ttymouse=xterm2
 
 set hlsearch
 
