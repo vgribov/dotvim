@@ -241,6 +241,14 @@ if has('cscope')
     nmap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>	
     nmap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
     nmap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>	
+
+    function! CScopeSearch()
+        call inputsave()
+        let keyword = input('Search for: ')
+        call inputrestore()
+        execute 'cs find g' keyword
+    endfunction
+    nnoremap <silent><leader>cs :call CScopeSearch()<cr>
 endif
 
 if filereadable(".vim")
