@@ -214,6 +214,9 @@ let g:vimfiler_marked_file_icon = '*'
 
 nnoremap <leader>ex :VimFiler -explorer<cr>
 
+" Bash syntax by default
+let g:is_bash=1
+
 " Cscope
 if has('cscope')
     "" Use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
