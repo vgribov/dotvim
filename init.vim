@@ -93,26 +93,26 @@ set imsearch=0
 highlight lCursor guifg=NONE guibg=Cyan
 
 " Buffers navigation
-nmap <C-^> :b!#<CR>
-nmap <leader>bd :Bclose<CR>
-nmap <leader>bc :Bclose!<CR>
+nnoremap <C-^> :b!#<CR>
+nnoremap <leader>bd :Bclose<CR>
+nnoremap <leader>bc :Bclose!<CR>
 
 " LHS comments
-map <leader># :s/^/#/<CR>:noh<CR>
-map <leader>/ :s/^/\/\//<CR>:noh<CR>
-map <leader>> :s/^/> /<CR>:noh<CR>
-map <leader>" :s/^/\"/<CR>:noh<CR>
-map <leader>% :s/^/%/<CR>:noh<CR>
-map <leader>! :s/^/!/<CR>:noh<CR>
-map <leader>; :s/^/;/<CR>:noh<CR>
-map <leader>- :s/^/--/<CR>:noh<CR>
-map <leader>c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:noh<CR>
+nnoremap <leader># :s/^/#/<CR>:noh<CR>
+nnoremap <leader>/ :s/^/\/\//<CR>:noh<CR>
+nnoremap <leader>> :s/^/> /<CR>:noh<CR>
+nnoremap <leader>" :s/^/\"/<CR>:noh<CR>
+nnoremap <leader>% :s/^/%/<CR>:noh<CR>
+nnoremap <leader>! :s/^/!/<CR>:noh<CR>
+nnoremap <leader>; :s/^/;/<CR>:noh<CR>
+nnoremap <leader>- :s/^/--/<CR>:noh<CR>
+nnoremap <leader>\ :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:noh<CR>
 
 " Wrapping comments
-map <leader>* :s/^\(.*\)$/\/\* \1 \*\//<CR>:noh<CR>
-map <leader>( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:noh<CR>
-map <leader>< :s/^\(.*\)$/<!-- \1 -->/<CR>:noh<CR>
-map <leader>d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:noh<CR>
+nnoremap <leader>* :s/^\(.*\)$/\/\* \1 \*\//<CR>:noh<CR>
+nnoremap <leader>( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:noh<CR>
+nnoremap <leader>< :s/^\(.*\)$/<!-- \1 -->/<CR>:noh<CR>
+nnoremap <leader>d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:noh<CR>
 
 " Automatically close matching pairs
 inoremap ( ()<Left>
@@ -140,13 +140,13 @@ let tagbar_type_objc = {
     \]
     \}
 
-nmap <silent><leader>tb :TagbarToggle<CR>
+nnoremap <silent><leader>tb :TagbarToggle<CR>
 
 " YouCompleteteMe
-nmap <silent><leader>gt :YcmCompleter GoTo<cr>
-nmap <silent><leader>yg :YcmCompleter GoToDefinition<cr>
-nmap <silent><leader>yd :YcmCompleter GoToDeclaration<cr>
-nmap <silent><leader>yt :YcmCompleter GetType<cr>
+nnoremap <silent><leader>gt :YcmCompleter GoTo<cr>
+nnoremap <silent><leader>yg :YcmCompleter GoToDefinition<cr>
+nnoremap <silent><leader>yd :YcmCompleter GoToDeclaration<cr>
+nnoremap <silent><leader>yt :YcmCompleter GetType<cr>
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_auto_trigger = 0
@@ -185,18 +185,18 @@ for wiki_name in wikis
 endfor
 
 " Make
-nmap <silent><leader>m :wa<cr>:make!<cr>
-nmap <silent><leader>mc :make! clean<cr>
+nnoremap <silent><leader>m :wa<cr>:make!<cr>
+nnoremap <silent><leader>mc :make! clean<cr>
 
 " Change dir to a current file
-nmap <leader>cd :cd %:p:h<cr>:pwd<cr>
+nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Unite
 let g:unite_source_history_yank_enable = 1
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
-nnoremap b :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+nnoremap <leader>l :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
 nnoremap <leader>. :<C-u>UniteResume<cr>
 
 " Unit find
@@ -212,7 +212,7 @@ let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 
-nmap <leader>ex :VimFiler -explorer<cr>
+nnoremap <leader>ex :VimFiler -explorer<cr>
 
 " Cscope
 if has('cscope')
@@ -233,14 +233,14 @@ if has('cscope')
     " To do the first type of search, hit 'CTRL-\', followed by one of the
     " cscope search types above (s,g,c,t,e,f,i,d). 
     "
-    nmap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>	
-    nmap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>	
-    nmap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nnoremap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nnoremap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>	
 
     function! CScopeSearch()
         call inputsave()
