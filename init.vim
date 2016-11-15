@@ -191,6 +191,13 @@ nnoremap <silent><leader>mc :make! clean<cr>
 " Change dir to a current file
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+" Make it easier to edit .vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Center screen in the input mode
+inoremap <leader>z <esc>z.i
+
 " Unite
 let g:unite_source_history_yank_enable = 1
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
