@@ -190,10 +190,11 @@ noremap <leader>< :s/^\(.*\)$/<!-- \1 -->/<CR>:noh<CR>
 noremap <leader>d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:noh<CR>
 
 " Automatically close matching pairs
-inoremap ( ()<Left>
-inoremap [ []<Left>
-inoremap ' ''<Left>
-inoremap " ""<Left>
+inoremap { {<cr>}<esc>O
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap ' ''<left>
+inoremap " ""<left>
 
 " Consider all .redmine files as Redmine wiki files.
 au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
@@ -253,11 +254,29 @@ if has('cscope')
     nnoremap <silent><leader>cs :call CScopeSearch()<cr>
 endif
 
-if filereadable(".vim")
-    so .vim
-endif
-
 hi NonText guifg=bg ctermfg=bg
 hi VertSplit guibg=bg ctermbg=bg
 hi YcmErrorSign guibg=bg ctermbg=bg
 hi lCursor guifg=NONE guibg=Cyan
+
+"
+" Misc functions
+"
+"
+function! EatSpace()
+    let c = nr2char(getchar(0))
+    return (c =~ '\s') ? '' : c
+endfunc
+
+function! InsertCode(abbr,str)
+    let syn = synIDattr(synIDtrans(synID(line('.'), col('.') - 1, 1)), 'name')
+    if syn ==? 'comment' || syn ==? 'string'
+        return a:abbr
+    else
+        return a:str . "=EatSpace()"
+    endif
+endfunction
+
+if filereadable(".vim")
+    so .vim
+endif
