@@ -196,6 +196,9 @@ inoremap [ []<left>
 inoremap ' ''<left>
 inoremap " ""<left>
 
+" Append line in insert mode
+inoremap <c-j> <c-o>o
+
 " Consider all .redmine files as Redmine wiki files.
 au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
