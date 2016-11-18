@@ -11,12 +11,88 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'godlygeek/tabular'
+
+"
+" Bclose
+"
 Plugin 'vadimr/bclose.vim'
+
+nnoremap <leader>bd :Bclose<CR>
+nnoremap <leader>bc :Bclose!<CR>
+
+"
+" Tagbar
+"
 Plugin 'majutsushi/tagbar'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Shougo/unite.vim'
+
+let tagbar_compact = 1
+let tagbar_autoclose = 1
+let tagbar_type_objc = {
+    \ 'ctagstype': 'ObjectiveC',
+    \ 'kinds' : [
+        \'M:macros',
+        \'t:types',
+        \'s:structures',
+        \'e:enumerations',
+        \'i:interface',
+        \'I:implementation',
+        \'p:properties',
+        \'m:methods',
+        \'c:class methods',
+        \'F:object fields',
+        \'f:functions'
+    \]
+    \}
+
+nnoremap <silent><leader>tb :TagbarToggle<CR>
+
+" 
+" YouCompleteteMe
+"
+if filereadable(".ycm_extra_conf.py")
+    Plugin 'Valloric/YouCompleteMe'
+    nnoremap <silent><leader>gt :YcmCompleter GoTo<cr>
+    nnoremap <silent><leader>yg :YcmCompleter GoToDefinition<cr>
+    nnoremap <silent><leader>yd :YcmCompleter GoToDeclaration<cr>
+    nnoremap <silent><leader>yt :YcmCompleter GetType<cr>
+    let g:ycm_confirm_extra_conf = 0
+    let g:ycm_min_num_of_chars_for_completion = 99
+    let g:ycm_auto_trigger = 0
+    let g:ycm_error_symbol = '✘'
+    let g:ycm_warning_symbol = '✗'
+endif
+
 Plugin 'Shougo/vimproc.vim'
+
+" 
+" Unite
+"
+Plugin 'Shougo/unite.vim'
+
+let g:unite_source_history_yank_enable = 1
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
+nnoremap <leader>l :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+nnoremap <leader>. :<C-u>UniteResume<cr>
+nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
+nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
+
+"
+" VimFiler
+"
 Plugin 'Shougo/vimfiler.vim'
+
+let g:vimfiler_as_default_explorer = 1
+
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+
+nnoremap <leader>ex :VimFiler -explorer<cr>
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-utils/vim-man'
 Plugin 'mtth/scratch.vim'
@@ -90,29 +166,28 @@ set fencs=utf-8,cp1251,koi8-r,ucs-2,cp866
 set keymap=russian-jcuken
 set iminsert=0
 set imsearch=0
-highlight lCursor guifg=NONE guibg=Cyan
+
+set completeopt=menu,longest
 
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
-nnoremap <leader>bd :Bclose<CR>
-nnoremap <leader>bc :Bclose!<CR>
 
 " LHS comments
-nnoremap <leader># :s/^/#/<CR>:noh<CR>
-nnoremap <leader>/ :s/^/\/\//<CR>:noh<CR>
-nnoremap <leader>> :s/^/> /<CR>:noh<CR>
-nnoremap <leader>" :s/^/\"/<CR>:noh<CR>
-nnoremap <leader>% :s/^/%/<CR>:noh<CR>
-nnoremap <leader>! :s/^/!/<CR>:noh<CR>
-nnoremap <leader>; :s/^/;/<CR>:noh<CR>
-nnoremap <leader>- :s/^/--/<CR>:noh<CR>
-nnoremap <leader>\ :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:noh<CR>
+noremap <leader># :s/^/#/<CR>:noh<CR>
+noremap <leader>/ :s/^/\/\//<CR>:noh<CR>
+noremap <leader>> :s/^/> /<CR>:noh<CR>
+noremap <leader>" :s/^/\"/<CR>:noh<CR>
+noremap <leader>% :s/^/%/<CR>:noh<CR>
+noremap <leader>! :s/^/!/<CR>:noh<CR>
+noremap <leader>; :s/^/;/<CR>:noh<CR>
+noremap <leader>- :s/^/--/<CR>:noh<CR>
+noremap <leader>\ :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:noh<CR>
 
 " Wrapping comments
-nnoremap <leader>* :s/^\(.*\)$/\/\* \1 \*\//<CR>:noh<CR>
-nnoremap <leader>( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:noh<CR>
-nnoremap <leader>< :s/^\(.*\)$/<!-- \1 -->/<CR>:noh<CR>
-nnoremap <leader>d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:noh<CR>
+noremap <leader>* :s/^\(.*\)$/\/\* \1 \*\//<CR>:noh<CR>
+noremap <leader>( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:noh<CR>
+noremap <leader>< :s/^\(.*\)$/<!-- \1 -->/<CR>:noh<CR>
+noremap <leader>d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:noh<CR>
 
 " Automatically close matching pairs
 inoremap ( ()<Left>
@@ -120,69 +195,8 @@ inoremap [ []<Left>
 inoremap ' ''<Left>
 inoremap " ""<Left>
 
-" Tagbar settings
-let tagbar_compact = 1
-let tagbar_autoclose = 1
-let tagbar_type_objc = {
-    \ 'ctagstype': 'ObjectiveC',
-    \ 'kinds' : [
-        \'M:macros',
-        \'t:types',
-        \'s:structures',
-        \'e:enumerations',
-        \'i:interface',
-        \'I:implementation',
-        \'p:properties',
-        \'m:methods',
-        \'c:class methods',
-        \'F:object fields',
-        \'f:functions'
-    \]
-    \}
-
-nnoremap <silent><leader>tb :TagbarToggle<CR>
-
-" YouCompleteteMe
-nnoremap <silent><leader>gt :YcmCompleter GoTo<cr>
-nnoremap <silent><leader>yg :YcmCompleter GoToDefinition<cr>
-nnoremap <silent><leader>yd :YcmCompleter GoToDeclaration<cr>
-nnoremap <silent><leader>yt :YcmCompleter GetType<cr>
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_min_num_of_chars_for_completion = 99
-let g:ycm_auto_trigger = 0
-let g:ycm_error_symbol = '✘'
-let g:ycm_warning_symbol = '✗'
-hi YcmErrorSign guibg=bg ctermbg=bg
-
-set completeopt=menu,longest
-
 " Consider all .redmine files as Redmine wiki files.
 au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
-
-" VimWiki configuration
-let g:vimwiki_dir_link = 'index'
-let g:vimwiki_table_auto_fmt = 0
-
-let vimwiki_path='$HOME/seva.grbv@gmail.com/vimwiki/'
-let vimwiki_export_path='$HOME/seva.grbv@gmail.com/vimwiki/html/'
-let wiki_settings={
-    \ 'template_path': vimwiki_export_path.'vimwiki-assets/',
-    \ 'template_default': 'default',
-    \ 'template_ext': '.html',
-    \ 'auto_export': 0,
-    \ 'nested_syntaxes': { 'c': 'c', 'c++': 'cpp', 'sh': 'sh' }
-\ }
-
-let wikis=["personal"]
-let g:vimwiki_list = []
-for wiki_name in wikis
-    let wiki=copy(wiki_settings)
-    let wiki.path = vimwiki_path.wiki_name.'/'
-    let wiki.path_html = vimwiki_export_path.wiki_name.'/'
-    let wiki.diary_index = 'index'
-    let wiki.diary_rel_path = 'diary/'
-    call add(g:vimwiki_list, wiki)
-endfor
 
 " Make
 nnoremap <silent><leader>m :wa<cr>:make!<cr>
@@ -198,31 +212,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Center screen in the input mode
 inoremap <leader>z <esc>z.i
 
-" Unite
-let g:unite_source_history_yank_enable = 1
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
-nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
-nnoremap <leader>l :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
-nnoremap <leader>. :<C-u>UniteResume<cr>
-
-" Unit find
-nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
-nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
-
-" VimFiler
-let g:vimfiler_as_default_explorer = 1
-
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-
-nnoremap <leader>ex :VimFiler -explorer<cr>
-
-" Bash syntax by default
-let g:is_bash=1
 
 " Bash syntax by default
 let g:is_bash=1
@@ -270,3 +259,5 @@ endif
 
 hi NonText guifg=bg ctermfg=bg
 hi VertSplit guibg=bg ctermbg=bg
+hi YcmErrorSign guibg=bg ctermbg=bg
+hi lCursor guifg=NONE guibg=Cyan
