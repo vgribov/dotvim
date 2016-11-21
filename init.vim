@@ -172,22 +172,15 @@ set completeopt=menu,longest
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
 
-" LHS comments
-noremap <leader># :s/^/#/<CR>:noh<CR>
-noremap <leader>/ :s/^/\/\//<CR>:noh<CR>
-noremap <leader>> :s/^/> /<CR>:noh<CR>
-noremap <leader>" :s/^/\"/<CR>:noh<CR>
-noremap <leader>% :s/^/%/<CR>:noh<CR>
-noremap <leader>! :s/^/!/<CR>:noh<CR>
-noremap <leader>; :s/^/;/<CR>:noh<CR>
-noremap <leader>- :s/^/--/<CR>:noh<CR>
-noremap <leader>\ :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:noh<CR>
+autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
+autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
+autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
 
-" Wrapping comments
-noremap <leader>* :s/^\(.*\)$/\/\* \1 \*\//<CR>:noh<CR>
-noremap <leader>( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:noh<CR>
-noremap <leader>< :s/^\(.*\)$/<!-- \1 -->/<CR>:noh<CR>
-noremap <leader>d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:noh<CR>
+autocmd FileType python noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
+autocmd FileType python noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
+
+autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
+autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
 
 " Automatically close matching pairs
 inoremap { {<cr>}<esc>O
