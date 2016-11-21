@@ -73,7 +73,7 @@ let g:unite_source_history_yank_enable = 1
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
-nnoremap <leader>l :<C-u>Unite -no-split -buffer-name=buffer buffer<cr>
+nnoremap <leader>l :<C-u>Unite -no-split -quick-match -buffer-name=buffer buffer<cr>
 nnoremap <leader>. :<C-u>UniteResume<cr>
 nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
 nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
