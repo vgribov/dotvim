@@ -121,6 +121,7 @@ set mouse=a
 set ttymouse=xterm2
 
 set hlsearch
+nohlsearch " Don't highlight last search when .vimrc reloaded
 
 set colorcolumn=80
 
@@ -169,18 +170,33 @@ set imsearch=0
 
 set completeopt=menu,longest
 
+augroup c_files
+    autocmd!
+    autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
+    autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
+    autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
+augroup END
+
+augroup py_files
+    autocmd!
+    autocmd FileType python noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
+    autocmd FileType python noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
+augroup END
+
+augroup vim_files
+    autocmd!
+    autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
+    autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
+augroup END
+
+augroup syntax
+    autocmd!
+    " Consider all .redmine files as Redmine wiki files.
+    autocmd BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
+augroup END
+
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
-
-autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
-autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
-autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
-
-autocmd FileType python noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
-autocmd FileType python noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
-
-autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
-autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
 
 " Automatically close matching pairs
 inoremap { {}<left>
@@ -191,9 +207,6 @@ inoremap " ""<left>
 
 " Append line in insert mode
 inoremap <c-j> <c-o>o
-
-" Consider all .redmine files as Redmine wiki files.
-au BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 
 " Make
 nnoremap <silent><leader>m :wa<cr>:make!<cr>
