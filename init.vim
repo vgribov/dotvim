@@ -51,10 +51,10 @@ nnoremap <silent><leader>tb :TagbarToggle<CR>
 "
 if filereadable(".ycm_extra_conf.py")
     Plugin 'Valloric/YouCompleteMe'
-    nnoremap <silent><leader>gt :YcmCompleter GoTo<cr>
-    nnoremap <silent><leader>yg :YcmCompleter GoToDefinition<cr>
-    nnoremap <silent><leader>yd :YcmCompleter GoToDeclaration<cr>
-    nnoremap <silent><leader>yt :YcmCompleter GetType<cr>
+    nnoremap <silent> <localleader>gt :YcmCompleter GoTo<cr>
+    nnoremap <silent> <localleader>yg :YcmCompleter GoToDefinition<cr>
+    nnoremap <silent> <localleader>yd :YcmCompleter GoToDeclaration<cr>
+    nnoremap <silent> <localleader>yt :YcmCompleter GetType<cr>
     let g:ycm_confirm_extra_conf = 0
     let g:ycm_min_num_of_chars_for_completion = 99
     let g:ycm_auto_trigger = 0
@@ -183,7 +183,7 @@ autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<c
 autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
 
 " Automatically close matching pairs
-inoremap { {<cr>}<esc>O
+inoremap { {}<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap ' ''<left>
