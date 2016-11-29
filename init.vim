@@ -97,6 +97,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-utils/vim-man'
 Plugin 'mtth/scratch.vim'
 Plugin 'itchyny/lightline.vim'
+Plugin 'hynek/vim-python-pep8-indent'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -208,6 +209,9 @@ inoremap " ""<left>
 " Append line in insert mode
 inoremap <c-j> <c-o>o
 
+" Go to the end of current parameter
+inoremap <c-l> <esc>ei
+
 " Make
 nnoremap <silent><leader>m :wa<cr>:make!<cr>
 nnoremap <silent><leader>mc :make! clean<cr>
@@ -218,10 +222,6 @@ nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 " Make it easier to edit .vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" Center screen in the input mode
-inoremap <leader>z <esc>z.i
-
 
 " Bash syntax by default
 let g:is_bash=1
