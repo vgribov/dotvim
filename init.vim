@@ -212,6 +212,9 @@ inoremap <c-j> <c-o>o
 " Go to the end of current parameter
 inoremap <c-l> <esc>ei
 
+" Change/delete paremeters
+onoremap p i(
+
 " Make
 nnoremap <silent><leader>m :wa<cr>:make!<cr>
 nnoremap <silent><leader>mc :make! clean<cr>
