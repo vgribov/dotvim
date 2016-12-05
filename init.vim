@@ -158,10 +158,11 @@ set incsearch		" do incremental searching
 
 set diffopt=filler,vertical
 
-" no folds closed when a buffer is opened is
-set foldmethod=indent " Lines with equal indent form a fold
-set foldcolumn=0      " Display column indicating open/closed folds
-set foldlevel=99      " Default to no folds closed
+" Folding options {{{
+set foldmethod=marker
+set foldcolumn=0
+set foldlevel=0
+" }}}
 
 " Show matching parenthesis
 set showmatch
@@ -206,7 +207,6 @@ augroup END
 " Vimscript file settings {{{
 augroup vim_files
     autocmd!
-    autocmd FileType vim setlocal foldmethod=marker foldlevel=0
     autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
     autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
 augroup END
