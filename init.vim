@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 
+" Plugins {{{
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -10,19 +11,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" tabular plugin {{{
 Plugin 'godlygeek/tabular'
+" }}}
 
-"
-" Bclose
-"
+" Bclose plugin {{{
 Plugin 'vadimr/bclose.vim'
 
 nnoremap <leader>bd :Bclose<CR>
 nnoremap <leader>bc :Bclose!<CR>
+" }}}
 
-"
-" Tagbar
-"
+" Tagbar plugin {{{
 Plugin 'majutsushi/tagbar'
 
 let tagbar_compact = 1
@@ -45,10 +45,9 @@ let tagbar_type_objc = {
     \}
 
 nnoremap <silent><leader>tb :TagbarToggle<CR>
+" }}}
 
-" 
-" YouCompleteteMe
-"
+" YouCompleteteMe plugin {{{
 if filereadable(".ycm_extra_conf.py")
     Plugin 'Valloric/YouCompleteMe'
     nnoremap <silent> <localleader>gt :YcmCompleter GoTo<cr>
@@ -61,12 +60,13 @@ if filereadable(".ycm_extra_conf.py")
     let g:ycm_error_symbol = '✘'
     let g:ycm_warning_symbol = '✗'
 endif
+" }}}
 
+" vimporc plugin {{{
 Plugin 'Shougo/vimproc.vim'
+" }}}
 
-" 
-" Unite
-"
+" Unite plugin {{{
 Plugin 'Shougo/unite.vim'
 
 let g:unite_source_history_yank_enable = 1
@@ -77,10 +77,9 @@ nnoremap <leader>l :<C-u>Unite -no-split -quick-match -buffer-name=buffer buffer
 nnoremap <leader>. :<C-u>UniteResume<cr>
 nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
 nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
+" }}}
 
-"
-" VimFiler
-"
+" VimFiler plugin {{{
 Plugin 'Shougo/vimfiler.vim'
 
 let g:vimfiler_as_default_explorer = 1
@@ -92,12 +91,27 @@ let g:vimfiler_file_icon = '-'
 let g:vimfiler_marked_file_icon = '*'
 
 nnoremap <leader>ex :VimFiler -explorer<cr>
+" }}}
 
+" vim-fugitive plugin {{{
 Plugin 'tpope/vim-fugitive'
+" }}}
+
+" vim-man plugin {{{
 Plugin 'vim-utils/vim-man'
+" }}}
+
+" scratch plugin {{{
 Plugin 'mtth/scratch.vim'
+" }}}
+
+" lightline plugin {{{
 Plugin 'itchyny/lightline.vim'
+" }}}
+
+" vim-python-pep8-indent {{{
 Plugin 'hynek/vim-python-pep8-indent'
+" }}}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -113,6 +127,7 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+" }}}
 
 syntax on
 colorscheme Tomorrow-Night
@@ -171,30 +186,43 @@ set imsearch=0
 
 set completeopt=menu,longest
 
+" C file settings {{{
 augroup c_files
     autocmd!
     autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
     autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
     autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
 augroup END
+" }}}
 
+" Python file settings {{{
 augroup py_files
     autocmd!
     autocmd FileType python noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
     autocmd FileType python noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
 augroup END
+" }}}
 
+" Vimscript file settings {{{
 augroup vim_files
     autocmd!
+    autocmd FileType vim setlocal foldmethod=marker foldlevel=0
     autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
     autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
 augroup END
+" }}}
 
+" Custom syntax settings {{{
 augroup syntax
     autocmd!
     " Consider all .redmine files as Redmine wiki files.
     autocmd BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
 augroup END
+" Bash syntax by default
+let g:is_bash=1
+" }}}
+
+" Mappings {{{
 
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
@@ -226,10 +254,9 @@ nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Bash syntax by default
-let g:is_bash=1
+" }}}
 
-" Cscope
+" Cscope settings {{{
 if has('cscope')
     "" Use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
@@ -265,16 +292,16 @@ if has('cscope')
     endfunction
     nnoremap <silent><leader>cs :call CScopeSearch()<cr>
 endif
+" }}}
 
-hi NonText guifg=bg ctermfg=bg
-hi VertSplit guibg=bg ctermbg=bg
-hi YcmErrorSign guibg=bg ctermbg=bg
-hi lCursor guifg=NONE guibg=Cyan
+" Highligting settings {{{
+highlight NonText guifg=bg ctermfg=bg
+highlight VertSplit guibg=bg ctermbg=bg
+highlight YcmErrorSign guibg=bg ctermbg=bg
+highlight lCursor guifg=NONE guibg=Cyan
+" }}}
 
-"
-" Misc functions
-"
-"
+" Misc functions {{{
 function! EatSpace()
     let c = nr2char(getchar(0))
     return (c =~ '\s') ? '' : c
@@ -288,6 +315,7 @@ function! InsertCode(abbr,str)
         return a:str . "=EatSpace()"
     endif
 endfunction
+" }}}
 
 if filereadable(".vim")
     so .vim
