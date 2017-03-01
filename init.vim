@@ -245,11 +245,19 @@ inoremap [ []<left>
 inoremap ' ''<left>
 inoremap " ""<left>
 
-" Append line in insert mode
-inoremap <c-j> <c-o>o
 
-" Go to the end of current parameter
-inoremap <c-l> <esc>ei
+" Movements while typing
+inoremap <c-l> <right>
+inoremap <c-h> <left>
+inoremap <c-j> <c-o>o
+inoremap <c-k> <c-o>O
+
+" Center the screen while typing
+function! SVCenterScreen()
+    let cursorpos = getpos('.')
+    return "\<esc>z.:call setpos('.', " . string(cursorpos) . ")\<cr>i"
+endfunction
+inoremap <c-z> <c-r>=SVCenterScreen()<cr>
 
 " Change/delete paremeters
 onoremap p i(
