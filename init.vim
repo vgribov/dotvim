@@ -51,7 +51,7 @@ nnoremap <silent><leader>tb :TagbarToggle<CR>
 " YouCompleteteMe {{{
 if filereadable(".ycm_extra_conf.py")
     Plugin 'Valloric/YouCompleteMe'
-    nnoremap <silent> <localleader>yg :YcmCompleter GoToDefinition<cr>
+    nnoremap <silent> <localleader>yg :YcmCompleter GoTo<cr>
     nnoremap <silent> <localleader>yd :YcmCompleter GoToDeclaration<cr>
     nnoremap <silent> <localleader>yt :YcmCompleter GetType<cr>
     let g:ycm_confirm_extra_conf = 0
@@ -329,22 +329,6 @@ highlight NonText guifg=bg ctermfg=bg
 highlight VertSplit guibg=bg ctermbg=bg
 highlight YcmErrorSign guibg=bg ctermbg=bg
 highlight lCursor guifg=NONE guibg=Cyan
-" }}}
-
-" Misc functions {{{
-function! EatSpace()
-    let c = nr2char(getchar(0))
-    return (c =~ '\s') ? '' : c
-endfunc
-
-function! InsertCode(abbr,str)
-    let syn = synIDattr(synIDtrans(synID(line('.'), col('.') - 1, 1)), 'name')
-    if syn ==? 'comment' || syn ==? 'string'
-        return a:abbr
-    else
-        return a:str . "=EatSpace()"
-    endif
-endfunction
 " }}}
 
 if filereadable(".vim")
