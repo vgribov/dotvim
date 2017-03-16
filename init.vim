@@ -12,18 +12,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" tabular plugin {{{
+" tabular {{{
 Plugin 'godlygeek/tabular'
 " }}}
 
-" Bclose plugin {{{
+" Bclose {{{
 Plugin 'vadimr/bclose.vim'
 
 nnoremap <leader>bd :Bclose<CR>
 nnoremap <leader>bc :Bclose!<CR>
 " }}}
 
-" Tagbar plugin {{{
+" Tagbar {{{
 Plugin 'majutsushi/tagbar'
 
 let tagbar_compact = 1
@@ -48,10 +48,9 @@ let tagbar_type_objc = {
 nnoremap <silent><leader>tb :TagbarToggle<CR>
 " }}}
 
-" YouCompleteteMe plugin {{{
+" YouCompleteteMe {{{
 if filereadable(".ycm_extra_conf.py")
     Plugin 'Valloric/YouCompleteMe'
-    nnoremap <silent> <localleader>gt :YcmCompleter GoTo<cr>
     nnoremap <silent> <localleader>yg :YcmCompleter GoToDefinition<cr>
     nnoremap <silent> <localleader>yd :YcmCompleter GoToDeclaration<cr>
     nnoremap <silent> <localleader>yt :YcmCompleter GetType<cr>
@@ -64,11 +63,18 @@ if filereadable(".ycm_extra_conf.py")
 endif
 " }}}
 
-" vimporc plugin {{{
+" Gtags {{{
+Plugin 'vim-scripts/gtags.vim'
+let g:Gtags_OpenQuickfixWindow = 0
+nnoremap <silent> <localleader>gt :Gtags <C-R>=expand("<cword>")<cr><cr>
+nnoremap <silent> <localleader>gr :Gtags -r <C-R>=expand("<cword>")<cr><cr>
+" }}}
+
+" vimporc {{{
 Plugin 'Shougo/vimproc.vim'
 " }}}
 
-" Unite plugin {{{
+" Unite {{{
 Plugin 'Shougo/unite.vim'
 
 let g:unite_source_history_yank_enable = 1
@@ -81,7 +87,7 @@ nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
 nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
 " }}}
 
-" VimFiler plugin {{{
+" VimFiler {{{
 Plugin 'Shougo/vimfiler.vim'
 
 let g:vimfiler_as_default_explorer = 1
@@ -95,19 +101,19 @@ let g:vimfiler_marked_file_icon = '*'
 nnoremap <leader>ex :VimFiler<cr>
 " }}}
 
-" vim-fugitive plugin {{{
+" vim-fugitive {{{
 Plugin 'tpope/vim-fugitive'
 " }}}
 
-" vim-man plugin {{{
+" vim-man {{{
 Plugin 'vim-utils/vim-man'
 " }}}
 
-" scratch plugin {{{
+" scratch {{{
 Plugin 'mtth/scratch.vim'
 " }}}
 
-" lightline plugin {{{
+" lightline {{{
 Plugin 'itchyny/lightline.vim'
 " }}}
 
@@ -238,6 +244,10 @@ nnoremap <silent><esc> :nohlsearch<cr>
 
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
+
+" Convenient movements through quickfix window entries
+nnoremap <c-n> :cn<cr>
+nnoremap <c-p> :cp<cr>
 
 " Automatically close matching pairs
 inoremap { {}<left>
