@@ -59,7 +59,7 @@ if filereadable(".ycm_extra_conf.py")
     let g:ycm_auto_trigger = 0
     let g:ycm_error_symbol = '✘'
     let g:ycm_warning_symbol = '✗'
-    let g:ycm_key_invoke_completion = '<C-N>'
+    " let g:ycm_key_invoke_completion = '<C-N>'
 endif
 " }}}
 
@@ -107,6 +107,7 @@ Plugin 'tpope/vim-fugitive'
 
 " vim-man {{{
 Plugin 'vim-utils/vim-man'
+nnoremap <silent> <localleader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 " }}}
 
 " scratch {{{
@@ -119,6 +120,11 @@ Plugin 'itchyny/lightline.vim'
 
 " vim-python-pep8-indent {{{
 Plugin 'hynek/vim-python-pep8-indent'
+" }}}
+
+" vim-gfm-syntax {{{
+Plugin 'rhysd/vim-gfm-syntax'
+let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 " }}}
 
 " All of your Plugins must be added before the following line
@@ -226,6 +232,13 @@ augroup vim_files
     autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
 augroup END
 " }}}
+
+augroup md_files
+    autocmd!
+    autocmd FileType markdown setlocal textwidth=79
+    autocmd FileType markdown setlocal formatoptions-=l
+    autocmd FileType markdown setlocal spell spelllang=en,ru,fr
+augroup END
 
 " Custom syntax settings {{{
 augroup syntax
