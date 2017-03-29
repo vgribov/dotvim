@@ -248,6 +248,7 @@ augroup syntax
 augroup END
 " Bash syntax by default
 let g:is_bash=1
+let c_no_curly_error=1
 " }}}
 
 " Mappings {{{
