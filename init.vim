@@ -238,6 +238,7 @@ augroup vim_files
     autocmd!
     autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
     autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
+    autocmd FileType vim inoremap <buffer> " "
 augroup END
 " }}}
 
