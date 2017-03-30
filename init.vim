@@ -244,6 +244,7 @@ augroup md_files
     autocmd FileType markdown setlocal spell spelllang=en,ru,fr
 augroup END
 
+
 " Custom syntax settings {{{
 augroup syntax
     autocmd!
@@ -258,7 +259,7 @@ let c_no_curly_error=1
 " Mappings {{{
 
 " Clear current search highlighting
-nnoremap <silent><esc> :nohlsearch<cr>
+nnoremap <silent><c-l> :nohlsearch<cr><c-l>
 
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
