@@ -355,6 +355,46 @@ highlight YcmErrorSign guibg=bg ctermbg=bg
 highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
+" Smart <tab> {{{
+function! SmartTab()
+    let cursorpos = getpos('.')
+    let cursorcol = cursorpos[2]
+    let curr_line = getline('.')
+
+    " Special subpattern to match only at cursor position
+    let curr_pos_pat = '\%' . cursorcol . 'c'
+
+    " Select next item in popup menu
+    if pumvisible()
+        return "\<c-n>"
+    endif
+
+    " Tab as usual at the left margin
+    if curr_line =~ '^\s*' . curr_pos_pat
+        return "\<tab>"
+    endif
+
+    " If after an identifier, do a keyword completion
+    if &filetype == 'c' || &filetype == 'cpp'
+        if curr_line =~ '\k' . curr_pos_pat 
+         \ || curr_line =~ '.' . curr_pos_pat 
+         \ || curr_line =~ '->' . curr_pos_pat
+         \ || curr_line =~ '::' . curr_pos_pat
+            return "\<c-x>\<c-u>"
+        endif
+    else
+        if curr_line =~ '\k' . curr_pos_pat 
+            return "\<c-n>"
+        endif
+    endif
+
+    " Otherwise, just be a <tab>
+    return "\<tab>"
+endfunction
+inoremap <silent> <tab> <c-r>=SmartTab()<cr>
+inoremap <s-tab> <c-p>
+" }}}
+
 if filereadable(".vim")
     so .vim
 endif
