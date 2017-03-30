@@ -127,8 +127,12 @@ Plugin 'rhysd/vim-gfm-syntax'
 let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 " }}}
 
-" {{{
+" vim-rtags {{{
 Plugin 'lyuts/vim-rtags'
+augroup vim_rtags
+    autocmd!
+    autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
+augroup END
 " }}}
 
 " All of your Plugins must be added before the following line
