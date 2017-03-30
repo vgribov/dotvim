@@ -127,6 +127,10 @@ Plugin 'rhysd/vim-gfm-syntax'
 let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 " }}}
 
+" {{{
+Plugin 'lyuts/vim-rtags'
+" }}}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on   " required
