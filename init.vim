@@ -127,6 +127,11 @@ Plugin 'rhysd/vim-gfm-syntax'
 let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 " }}}
 
+" vim-cpp-enhanced-highlight {{{ 
+Plugin 'octol/vim-cpp-enhanced-highlight'
+let c_no_curly_error=1
+" }}}
+
 " vim-rtags {{{
 Plugin 'lyuts/vim-rtags'
 augroup vim_rtags
@@ -269,7 +274,6 @@ augroup syntax
 augroup END
 " Bash syntax by default
 let g:is_bash=1
-let c_no_curly_error=1
 " }}}
 
 " Mappings {{{
