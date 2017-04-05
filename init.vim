@@ -214,6 +214,16 @@ augroup c_files
     autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
     autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
     autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
+    autocmd FileType c setlocal syntax=c.doxygen
+augroup END
+" }}}
+
+" Cxx file settings {{{
+augroup cxx_files
+    autocmd!
+    autocmd FileType cpp noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType cpp noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType cpp setlocal syntax=cpp.doxygen
 augroup END
 " }}}
 
