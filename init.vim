@@ -178,6 +178,7 @@ set showcmd		    " display incomplete commands
 set incsearch		" do incremental searching
 
 set diffopt=filler,vertical
+set belloff=all     " disable beeping
 
 " Folding options {{{
 set foldmethod=marker
