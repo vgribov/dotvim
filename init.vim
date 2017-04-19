@@ -392,9 +392,9 @@ function! SmartTab()
     " If after an identifier, do a keyword completion
     if &filetype == 'c' || &filetype == 'cpp'
         if curr_line =~ '\k' . curr_pos_pat 
-         \ || curr_line =~ '.' . curr_pos_pat 
-         \ || curr_line =~ '->' . curr_pos_pat
-         \ || curr_line =~ '::' . curr_pos_pat
+            \ || curr_line =~ '\.' . curr_pos_pat 
+            \ || curr_line =~ '->' . curr_pos_pat
+            \ || curr_line =~ '::' . curr_pos_pat
             return "\<c-x>\<c-u>"
         endif
     else
