@@ -10,4 +10,5 @@ set guioptions-=T
 set guioptions-=m 
 set guioptions-=L 
 set guioptions-=r 
+set guioptions-=e 
 set lines=999 columns=150
