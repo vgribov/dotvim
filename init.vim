@@ -303,6 +303,8 @@ inoremap <c-l> <right>
 inoremap <c-h> <left>
 inoremap <c-j> <c-o>o
 inoremap <c-k> <c-o>O
+inoremap <c-e> <c-o>E<right>
+inoremap <c-b> <c-o>B
 
 " Center the screen while typing
 function! SVCenterScreen()
