@@ -140,6 +140,10 @@ augroup vim_rtags
 augroup END
 " }}}
 
+" taboo {{{
+Plugin 'gcmt/taboo.vim'
+" }}}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on   " required
@@ -396,9 +400,9 @@ function! SmartTab()
     " If after an identifier, do a keyword completion
     if &filetype == 'c' || &filetype == 'cpp'
         if curr_line =~ '\k' . curr_pos_pat 
-         \ || curr_line =~ '.' . curr_pos_pat 
-         \ || curr_line =~ '->' . curr_pos_pat
-         \ || curr_line =~ '::' . curr_pos_pat
+            \ || curr_line =~ '\.' . curr_pos_pat 
+            \ || curr_line =~ '->' . curr_pos_pat
+            \ || curr_line =~ '::' . curr_pos_pat
             return "\<c-x>\<c-u>"
         endif
     else

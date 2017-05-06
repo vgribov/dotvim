@@ -1,5 +1,5 @@
 if has('gui_gtk2')
-  set guifont=Menlo\ 11
+  set guifont=Menlo\ 8
 elseif has('win32') || has('win64')
   set guifont=Consolas:h9
 else
@@ -10,4 +10,5 @@ set guioptions-=T
 set guioptions-=m 
 set guioptions-=L 
 set guioptions-=r 
+set guioptions-=e 
 set lines=999 columns=150
