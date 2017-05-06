@@ -214,6 +214,8 @@ set imsearch=0
 
 set completeopt=menu,longest
 
+let maplocalleader=","
+
 " C file settings {{{
 augroup c_files
     autocmd!
