@@ -285,7 +285,7 @@ let g:is_bash=1
 " Mappings {{{
 
 " Clear current search highlighting
-nnoremap <silent><c-l> :nohlsearch<cr><c-l>
+nnoremap <silent><c-l> :nohlsearch<cr>
 
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
