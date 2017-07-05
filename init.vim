@@ -372,10 +372,12 @@ endif
 " }}}
 
 " Highligting settings {{{
-highlight NonText guifg=bg ctermfg=bg
-highlight VertSplit guibg=bg ctermbg=bg
-highlight YcmErrorSign guibg=bg ctermbg=bg
-highlight lCursor guifg=NONE guibg=Cyan
+if &t_Co == 256
+    highlight NonText guifg=bg ctermfg=bg
+    highlight VertSplit guibg=bg ctermbg=bg
+    highlight YcmErrorSign guibg=bg ctermbg=bg
+    highlight lCursor guifg=NONE guibg=Cyan
+endif
 " }}}
 
 " Smart <tab> {{{
