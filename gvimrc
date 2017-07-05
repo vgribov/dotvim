@@ -1,4 +1,4 @@
-if has('gui_gtk2')
+if has('gui_gtk3')
   set guifont=Menlo\ 8
 elseif has('win32') || has('win64')
   set guifont=Consolas:h9
