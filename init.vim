@@ -106,7 +106,9 @@ Plugin 'tpope/vim-fugitive'
 " }}}
 
 " vim-man {{{
-Plugin 'vim-utils/vim-man'
+if !has('nvim')
+    Plugin 'vim-utils/vim-man'
+endif
 nnoremap <silent> <localleader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 " }}}
 
