@@ -166,7 +166,10 @@ colorscheme Tomorrow-Night
 
 " Enable mouse support
 set mouse=a
-set ttymouse=xterm2
+
+if !has('nvim')
+    set ttymouse=xterm2
+endif
 
 set hlsearch
 nohlsearch " Don't highlight last search when .vimrc reloaded
