@@ -336,6 +336,10 @@ nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
 " }}}
 
 " Cscope settings {{{
