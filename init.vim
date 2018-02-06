@@ -432,6 +432,10 @@ inoremap <silent> <tab> <c-r>=SmartTab()<cr>
 inoremap <s-tab> <c-p>
 " }}}
 
+" Eliminating delays on ESC in vim and tmux {{{
+set timeoutlen=1000 ttimeoutlen=0
+" }}}
+
 if filereadable(".vim")
     so .vim
 endif
