@@ -149,6 +149,10 @@ Plugin 'gcmt/taboo.vim'
 Plugin 'jszakmeister/vim-togglecursor'
 " }}}
 
+" vim-qml {{{
+Plugin 'peterhoeg/vim-qml'
+" }}}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on   " required
