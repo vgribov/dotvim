@@ -1,6 +1,5 @@
 set nocompatible
 filetype off
-syntax on
 
 " Plugins {{{
 " set the runtime path to include Vundle and initialize
@@ -162,6 +161,7 @@ filetype plugin indent on   " required
 " Put your non-Plugin stuff after this line
 " }}}
 
+syntax on
 colorscheme Tomorrow-Night
 
 " Enable mouse support
@@ -181,7 +181,6 @@ set hidden
 set history=100
 
 " Have some logic when indenting
-filetype indent on
 set nowrap
 set tabstop=4
 set shiftwidth=4
