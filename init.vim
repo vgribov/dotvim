@@ -153,6 +153,12 @@ Plugin 'jszakmeister/vim-togglecursor'
 Plugin 'peterhoeg/vim-qml'
 " }}}
 
+" supertab {{{
+Plugin 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" }}}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on   " required
@@ -394,46 +400,6 @@ if &t_Co == 256
     highlight YcmErrorSign guibg=bg ctermbg=bg
     highlight lCursor guifg=NONE guibg=Cyan
 endif
-" }}}
-
-" Smart <tab> {{{
-function! SmartTab()
-    let cursorpos = getpos('.')
-    let cursorcol = cursorpos[2]
-    let curr_line = getline('.')
-
-    " Special subpattern to match only at cursor position
-    let curr_pos_pat = '\%' . cursorcol . 'c'
-
-    " Select next item in popup menu
-    if pumvisible()
-        return "\<c-n>"
-    endif
-
-    " Tab as usual at the left margin
-    if curr_line =~ '^\s*' . curr_pos_pat
-        return "\<tab>"
-    endif
-
-    " If after an identifier, do a keyword completion
-    if &filetype == 'c' || &filetype == 'cpp'
-        if curr_line =~ '\k' . curr_pos_pat 
-            \ || curr_line =~ '\.' . curr_pos_pat 
-            \ || curr_line =~ '->' . curr_pos_pat
-            \ || curr_line =~ '::' . curr_pos_pat
-            return "\<c-x>\<c-u>"
-        endif
-    else
-        if curr_line =~ '\k' . curr_pos_pat 
-            return "\<c-n>"
-        endif
-    endif
-
-    " Otherwise, just be a <tab>
-    return "\<tab>"
-endfunction
-inoremap <silent> <tab> <c-r>=SmartTab()<cr>
-inoremap <s-tab> <c-p>
 " }}}
 
 " Eliminating delays on ESC in vim and tmux {{{
