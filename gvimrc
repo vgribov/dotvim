@@ -12,3 +12,6 @@ set guioptions-=L
 set guioptions-=r 
 set guioptions-=e 
 set lines=80 columns=150
+
+set guicursor=n-v-c:block-blinkon0
+set guicursor+=i:ver10-blinkon0
