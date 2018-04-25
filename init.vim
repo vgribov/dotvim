@@ -283,13 +283,14 @@ augroup vim_files
 augroup END
 " }}}
 
+" Markdown settings {{{
 augroup md_files
     autocmd!
     autocmd FileType markdown setlocal textwidth=79
     autocmd FileType markdown setlocal formatoptions-=l
     autocmd FileType markdown setlocal spell spelllang=en,ru,fr
 augroup END
-
+" }}}
 
 " Custom syntax settings {{{
 augroup syntax
