@@ -138,6 +138,7 @@ Plugin 'lyuts/vim-rtags'
 augroup vim_rtags
     autocmd!
     autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
+    nnoremap <leader>rl :<C-u>Unite -no-split -quick-match -buffer-name=projects rtags/project<cr>
 augroup END
 " }}}
 
