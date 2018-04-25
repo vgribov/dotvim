@@ -128,7 +128,7 @@ Plugin 'rhysd/vim-gfm-syntax'
 let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 " }}}
 
-" vim-cpp-enhanced-highlight {{{ 
+" vim-cpp-enhanced-highlight {{{
 Plugin 'octol/vim-cpp-enhanced-highlight'
 let c_no_curly_error=1
 " }}}
@@ -371,19 +371,19 @@ if has('cscope')
     set csto=0
 
     " show msg when any other cscope db added
-    set cscopeverbose  
+    set cscopeverbose
 
     " To do the first type of search, hit 'CTRL-\', followed by one of the
-    " cscope search types above (s,g,c,t,e,f,i,d). 
+    " cscope search types above (s,g,c,t,e,f,i,d).
     "
-    nnoremap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>	
-    nnoremap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>	
-    nnoremap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>	
-    nnoremap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>	
-    nnoremap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>	
-    nnoremap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nnoremap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>
+    nnoremap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>
     nnoremap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>	
+    nnoremap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>
 
     function! CScopeSearch()
         call inputsave()
