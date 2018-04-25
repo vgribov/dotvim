@@ -176,6 +176,7 @@ filetype plugin indent on   " required
 " Put your non-Plugin stuff after this line
 " }}}
 
+set t_Co=256
 syntax on
 colorscheme Tomorrow-Night
 
@@ -395,12 +396,10 @@ endif
 " }}}
 
 " Highligting settings {{{
-if &t_Co == 256
-    highlight NonText guifg=bg ctermfg=bg
-    highlight VertSplit guibg=bg ctermbg=bg
-    highlight YcmErrorSign guibg=bg ctermbg=bg
-    highlight lCursor guifg=NONE guibg=Cyan
-endif
+highlight NonText guifg=bg ctermfg=bg
+highlight VertSplit guibg=bg ctermbg=bg
+highlight YcmErrorSign guibg=bg ctermbg=bg
+highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
 " Eliminating delays on ESC in vim and tmux {{{
