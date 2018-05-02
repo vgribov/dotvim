@@ -355,6 +355,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Exit to normal mode in terminal window
 tnoremap <Esc> <C-\><C-n>
 
+" Run a terminal
+nnoremap <silent><leader>tr :silent terminal ++close<cr>
+
 " }}}
 
 " Cscope settings {{{
