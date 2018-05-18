@@ -298,6 +298,16 @@ augroup md_files
 augroup END
 " }}}
 
+" QML settings {{{
+augroup qml_files
+    autocmd!
+    autocmd FileType qml noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType qml noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType qml setlocal nosmartindent
+    autocmd FileType qml setlocal number
+augroup END
+" }}}
+
 " Custom syntax settings {{{
 augroup syntax
     autocmd!
