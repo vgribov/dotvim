@@ -160,6 +160,11 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 " }}}
 
+" vim-wordmotion {{{
+Plugin 'chaoren/vim-wordmotion'
+let g:wordmotion_prefix = '<Leader>'
+" }}}
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on   " required
