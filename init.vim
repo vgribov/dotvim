@@ -371,7 +371,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 tnoremap <Esc> <C-\><C-n>
 
 " Run a terminal
-nnoremap <silent><leader>tr :silent terminal ++close<cr>
+nnoremap <silent><leader>tr :silent terminal ++close bash<cr>
 
 " }}}
 
