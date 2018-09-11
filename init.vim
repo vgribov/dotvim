@@ -47,27 +47,6 @@ let tagbar_type_objc = {
 nnoremap <silent><leader>tb :TagbarToggle<CR>
 " }}}
 
-" YouCompleteteMe {{{
-if filereadable(".ycm_extra_conf.py")
-    Plugin 'Valloric/YouCompleteMe'
-    nnoremap <silent> <localleader>yg :YcmCompleter GoTo<cr>
-    nnoremap <silent> <localleader>yd :YcmCompleter GoToDeclaration<cr>
-    nnoremap <silent> <localleader>yt :YcmCompleter GetType<cr>
-    let g:ycm_confirm_extra_conf = 0
-    let g:ycm_min_num_of_chars_for_completion = 99
-    let g:ycm_auto_trigger = 0
-    let g:ycm_error_symbol = '✘'
-    let g:ycm_warning_symbol = '✗'
-    " let g:ycm_key_invoke_completion = '<C-N>'
-endif
-" }}}
-
-" Gtags {{{
-Plugin 'vim-scripts/gtags.vim'
-let g:Gtags_OpenQuickfixWindow = 0
-nnoremap <silent> <localleader>gt :Gtags <C-R>=expand("<cword>")<cr><cr>
-nnoremap <silent> <localleader>gr :Gtags -r <C-R>=expand("<cword>")<cr><cr>
-" }}}
 
 " vimporc {{{
 Plugin 'Shougo/vimproc.vim'
