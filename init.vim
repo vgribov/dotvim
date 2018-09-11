@@ -47,36 +47,14 @@ let tagbar_type_objc = {
 nnoremap <silent><leader>tb :TagbarToggle<CR>
 " }}}
 
+" Denite {{{
+Plugin 'Shougo/denite.nvim'
 
-" vimporc {{{
-Plugin 'Shougo/vimproc.vim'
-" }}}
-
-" Unite {{{
-Plugin 'Shougo/unite.vim'
-
-let g:unite_source_history_yank_enable = 1
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
-nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank history/yank<cr>
-nnoremap <leader>l :<C-u>Unite -no-split -quick-match -buffer-name=buffer buffer<cr>
-nnoremap <leader>. :<C-u>UniteResume<cr>
-nnoremap <F3> :<C-u>Unite -no-split -buffer-name=grep grep:.:-iR<cr>
-nnoremap <leader>s :<C-u>UniteWithCursorWord -no-split -buffer-name=grep grep:.:-iR<cr>
-" }}}
-
-" VimFiler {{{
-Plugin 'Shougo/vimfiler.vim'
-
-let g:vimfiler_as_default_explorer = 1
-
-let g:vimfiler_tree_leaf_icon = ' '
-let g:vimfiler_tree_opened_icon = '▾'
-let g:vimfiler_tree_closed_icon = '▸'
-let g:vimfiler_file_icon = '-'
-let g:vimfiler_marked_file_icon = '*'
-
-nnoremap <leader>ex :VimFiler<cr>
+nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
+nnoremap <silent><leader>l :<C-u>Denite -split=no -mode=normal -buffer-name=buffer buffer<cr>
+nnoremap <silent><F3> :<C-u>Denite -split=no -buffer-name=grep grep<cr>
+nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep::-nH:<C-r>=expand("<cword>")<cr><cr>
+nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
 " }}}
 
 " vim-fugitive {{{
@@ -403,7 +381,16 @@ highlight lCursor guifg=NONE guibg=Cyan
 set timeoutlen=1000 ttimeoutlen=0
 " }}}
 
+" Denite settings {{{
+call denite#custom#option('_', { 'split': 'no', 'mode': 'normal' })
 
+if executable('fd')
+    call denite#custom#var('grep', 'command', ['fd', '', '-L', '-t', 'f', '-x', 'grep'])
+    call denite#custom#var('grep', 'default_opts', ['-nH'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'separator', [';'])
+endif
+" }}}
 
 " Load .vim {{{
 if filereadable(".vim")
