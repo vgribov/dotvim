@@ -424,17 +424,10 @@ highlight lCursor guifg=NONE guibg=Cyan
 set timeoutlen=1000 ttimeoutlen=0
 " }}}
 
+
+
 " Load .vim {{{
-function! LoadDotVim()
-    if filereadable(".vim")
-        source .vim
-    endif
-endfunction
-
-call LoadDotVim()
-
-augroup dot_vim
-    autocmd!
-    autocmd DirChanged global :call LoadDotVim()
-augroup END
+if filereadable(".vim")
+    source .vim
+endif
 " }}}
