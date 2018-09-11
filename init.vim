@@ -122,6 +122,19 @@ Plugin 'chaoren/vim-wordmotion'
 let g:wordmotion_prefix = '<Leader>'
 " }}}
 
+Plugin 'tpope/vim-vinegar'
+
+nnoremap <silent> <leader>ex :Explore .<cr>
+let g:netrw_banner = 0
+
+autocmd FileType netrw call s:netrw_mappings()
+function! s:netrw_mappings() abort
+    nmap <silent><buffer> l <cr>
+    nmap <silent><buffer> h -
+    nmap <silent><buffer> q :Bclose<cr>
+    nmap <silent><buffer> <esc> :Bclose<cr>
+endfunction
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on   " required
