@@ -171,6 +171,10 @@ set colorcolumn=80
 set hidden
 set history=100
 
+set nobackup       " no backup files
+set nowritebackup  " only in case you don't want a backup file while editing
+set noswapfile     " no swap files
+
 " Have some logic when indenting
 set nowrap
 set tabstop=4
