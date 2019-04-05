@@ -345,6 +345,15 @@ tnoremap <Esc> <C-\><C-n>
 " Run a terminal
 nnoremap <silent><leader>tr :silent terminal ++close bash<cr>
 
+" Resize window in steps of 5
+nnoremap <silent> <C-W>> :exe "vertical resize +5"<CR>
+nnoremap <silent> <C-W>< :exe "vertical resize -5"<CR>
+nnoremap <silent> <C-W>+ :exe "resize +5"<CR>
+nnoremap <silent> <C-W>- :exe "resize -5"<CR>
+
+" Maximize window
+nnoremap <C-W>z <C-W>\| <C-W>_
+
 " }}}
 
 " Cscope settings {{{
