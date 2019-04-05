@@ -129,6 +129,9 @@ nnoremap <silent> - :Defx `expand('%:p:h')` -search=`expand('%:p')`<cr>
 nnoremap <silent> <leader>ex :Defx<cr>
 " }}}
 
+" thrift {{{
+Plugin 'solarnz/thrift.vim'
+" }}}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
