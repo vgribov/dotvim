@@ -92,7 +92,7 @@ let c_no_curly_error=1
 " }}}
 
 " vim-rtags {{{
-Plugin 'lyuts/vim-rtags'
+Plugin 'vgribov/vim-rtags'
 augroup vim_rtags
     autocmd!
     autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
