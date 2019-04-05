@@ -70,6 +70,7 @@ nnoremap <silent> <localleader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 
 " scratch {{{
 Plugin 'mtth/scratch.vim'
+let g:scratch_insert_autohide = 0
 " }}}
 
 " lightline {{{
