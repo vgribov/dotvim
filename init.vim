@@ -179,7 +179,10 @@ colorscheme Tomorrow-Night
 " Enable mouse support
 set mouse=a
 
-if !has('nvim')
+if has('nvim')
+    let g:python_host_prog  = '/usr/bin/python3.6'
+    let g:python3_host_prog = '/usr/bin/python3.6'
+else
     set ttymouse=xterm2
 endif
 
