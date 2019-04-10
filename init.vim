@@ -359,7 +359,7 @@ nnoremap <silent><leader>mc :make! clean<cr>
 nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Make it easier to edit .vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Exit to normal mode in terminal window
