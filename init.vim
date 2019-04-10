@@ -125,8 +125,31 @@ let g:wordmotion_prefix = '<Leader>'
 
 " Defx {{{
 Plugin 'Shougo/defx.nvim'
+
+" Do not load netrw plugin
+let g:loaded_netrw = 1
+let g:netrw_loaded_netrwPlugin = 1
+
 nnoremap <silent> - :Defx `expand('%:p:h')` -search=`expand('%:p')`<cr>
 nnoremap <silent> <leader>ex :Defx<cr>
+
+augroup defx
+    autocmd!
+    au VimEnter * :call OpenExplorerIfNeeded(expand('<amatch>'))
+augroup END
+
+function! OpenExplorerIfNeeded(file)
+    if a:file == ""
+        execute 'Defx'
+    elseif IsDir(a:file)
+        execute 'Defx' a:file
+    endif
+endfunction
+
+function! IsDir(dir)
+    return !empty(a:dir) && isdirectory(a:dir)
+endfunction
+
 " }}}
 
 " thrift {{{
