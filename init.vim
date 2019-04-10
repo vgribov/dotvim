@@ -417,9 +417,15 @@ endif
 " }}}
 
 " Defx settings {{{
-" Like Textmate icons.
-call defx#custom#column('mark', {
+call defx#custom#column('filename', {
       \ 'directory_icon': '▸',
+      \ 'opened_icon': '▾',
+      \ 'root_icon': ' ',
+      \ 'min_width': 40,
+      \ 'max_width': 40,
+      \ })
+
+call defx#custom#column('mark', {
       \ 'readonly_icon': '✗',
       \ 'selected_icon': '✓',
       \ })
@@ -432,6 +438,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> m         defx#do_action('move')
   nnoremap <silent><buffer><expr> p         defx#do_action('paste')
   nnoremap <silent><buffer><expr> l         defx#do_action('open')
+  nnoremap <silent><buffer><expr> t         defx#do_action('open_or_close_tree')
   "nnoremap <silent><buffer><expr> E         defx#do_action('open', 'vsplit')
   "nnoremap <silent><buffer><expr> P         defx#do_action('open', 'pedit')
   nnoremap <silent><buffer><expr> K         defx#do_action('new_directory')
