@@ -57,6 +57,16 @@ nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep::-nH:<C
 nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
 " }}}
 
+" Deoplete {{{
+Plugin 'Shougo/deoplete.nvim'
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+" }}}
+
+" Deoplete-Jedi {{{
+Plugin 'deoplete-plugins/deoplete-jedi'
+" }}}
+
 " vim-fugitive {{{
 Plugin 'tpope/vim-fugitive'
 " }}}
@@ -457,6 +467,18 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <Space>
   \ denite#do_map('toggle_select').'j'
 endfunction
+" }}}
+
+" Deoplete settings {{{
+" Set a single option
+call deoplete#custom#option('auto_complete_delay', 200)
+
+" Pass a dictionary to set multiple options
+call deoplete#custom#option({
+    \ 'auto_complete': v:true,
+    \ 'auto_complete_delay': 500,
+    \ 'smart_case': v:true,
+    \ })
 " }}}
 
 " Defx settings {{{
