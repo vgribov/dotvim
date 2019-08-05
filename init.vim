@@ -249,7 +249,7 @@ set keymap=russian-jcuken
 set iminsert=0
 set imsearch=0
 
-set completeopt=menu,longest
+set completeopt=menu,noinsert,noselect
 
 let maplocalleader=","
 
