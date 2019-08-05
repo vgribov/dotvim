@@ -106,7 +106,7 @@ Plugin 'vgribov/vim-rtags'
 augroup vim_rtags
     autocmd!
     autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
-    nnoremap <leader>rl :<C-u>Unite -no-split -quick-match -buffer-name=projects rtags/project<cr>
+    autocmd FileType c,cpp inoremap <buffer> <C-Space> <C-x><C-u>
 augroup END
 " }}}
 
