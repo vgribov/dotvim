@@ -51,7 +51,7 @@ nnoremap <silent><leader>tb :TagbarToggle<CR>
 Plugin 'Shougo/denite.nvim'
 
 nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
-nnoremap <silent><leader>l :<C-u>Denite -split=no -mode=normal -buffer-name=buffer buffer<cr>
+nnoremap <silent><leader>l :<C-u>Denite -split=no -buffer-name=buffer buffer<cr>
 nnoremap <silent><F3> :<C-u>Denite -split=no -buffer-name=grep grep<cr>
 nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep::-nH:<C-r>=expand("<cword>")<cr><cr>
 nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
@@ -440,6 +440,23 @@ if executable('fd')
     call denite#custom#var('grep', 'recursive_opts', [])
     call denite#custom#var('grep', 'separator', [';'])
 endif
+
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
 " }}}
 
 " Defx settings {{{
