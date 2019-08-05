@@ -272,19 +272,11 @@ augroup cxx_files
 augroup END
 " }}}
 
-" Python file settings {{{
-augroup py_files
+" Files with #-comments {{{
+augroup hash_comments
     autocmd!
-    autocmd FileType python noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
-    autocmd FileType python noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
-augroup END
-" }}}
-
-" sh file settings {{{
-augroup sh_files
-    autocmd!
-    autocmd FileType sh noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
-    autocmd FileType sh noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
+    autocmd FileType python,sh,cmake noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
+    autocmd FileType python,sh,cmake noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
 augroup END
 " }}}
 
