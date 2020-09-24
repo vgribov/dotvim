@@ -1,213 +1,57 @@
-set nocompatible
-filetype off
+let mapleader      = ' '
+let maplocalleader = ','
 
 " Plugins {{{
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-call vundle#begin('~/.config/nvim/bundle')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" tabular {{{
-Plugin 'godlygeek/tabular'
-" }}}
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
 
-" Bclose {{{
-Plugin 'vadimr/bclose.vim'
+    " Shougo
+    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+    call dein#add('Shougo/defx.nvim')
+    call dein#add('Shougo/denite.nvim')
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('deoplete-plugins/deoplete-jedi',     {'on_ft': ['python']})
 
-nnoremap <leader>bd :Bclose<CR>
-nnoremap <leader>bc :Bclose!<CR>
-" }}}
+    " Basic
+    call dein#add('vadimr/bclose.vim',                  {'on_cmd': 'BClose'})
+    call dein#add('majutsushi/tagbar')
+    call dein#add('itchyny/lightline.vim')
+    call dein#add('gcmt/taboo.vim',                     {'on_cmd': 'TabooOpen'})
 
-" Tagbar {{{
-Plugin 'majutsushi/tagbar'
+    " Development
+    call dein#add('tpope/vim-fugitive')
+    call dein#add('octol/vim-cpp-enhanced-highlight',   {'on_ft': ['cpp']})
+    call dein#add('vgribov/vim-rtags',                  {'on_ft': ['c', 'cpp']})
+    call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
+    call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
+    call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
+    call dein#add('solarnz/thrift.vim',                 {'on_ft': ['thrift']})
+    call dein#add('aklt/plantuml-syntax',               {'on_ft': ['plantuml']})
 
-let tagbar_compact = 1
-let tagbar_autoclose = 1
-let tagbar_type_objc = {
-    \ 'ctagstype': 'ObjectiveC',
-    \ 'kinds' : [
-        \'M:macros',
-        \'t:types',
-        \'s:structures',
-        \'e:enumerations',
-        \'i:interface',
-        \'I:implementation',
-        \'p:properties',
-        \'m:methods',
-        \'c:class methods',
-        \'F:object fields',
-        \'f:functions'
-    \]
-    \}
-
-nnoremap <silent><leader>tb :TagbarToggle<CR>
-" }}}
-
-" Denite {{{
-Plugin 'Shougo/denite.nvim'
-
-nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
-nnoremap <silent><leader>l :<C-u>Denite -split=no -buffer-name=buffer buffer<cr>
-nnoremap <silent><F3> :<C-u>Denite -split=no -buffer-name=grep grep<cr>
-nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep::-nH:<C-r>=expand("<cword>")<cr><cr>
-nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
-" }}}
-
-" Deoplete {{{
-Plugin 'Shougo/deoplete.nvim'
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-" }}}
-
-" Deoplete-Jedi {{{
-Plugin 'deoplete-plugins/deoplete-jedi'
-" }}}
-
-" vim-fugitive {{{
-Plugin 'tpope/vim-fugitive'
-" }}}
-
-" vim-man {{{
-if !has('nvim')
-    Plugin 'vim-utils/vim-man'
+    call dein#end()
+    call dein#save_state()
 endif
-nnoremap <silent> <localleader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 " }}}
 
-" scratch {{{
-Plugin 'mtth/scratch.vim'
-let g:scratch_insert_autohide = 0
-" }}}
-
-" lightline {{{
-Plugin 'itchyny/lightline.vim'
-" }}}
-
-" vim-python-pep8-indent {{{
-Plugin 'hynek/vim-python-pep8-indent'
-" }}}
-
-" vim-gfm-syntax {{{
-Plugin 'rhysd/vim-gfm-syntax'
-let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
-" }}}
-
-" vim-cpp-enhanced-highlight {{{
-Plugin 'octol/vim-cpp-enhanced-highlight'
-let c_no_curly_error=1
-" }}}
-
-" vim-rtags {{{
-Plugin 'vgribov/vim-rtags'
-augroup vim_rtags
-    autocmd!
-    autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
-    autocmd FileType c,cpp inoremap <buffer> <C-Space> <C-x><C-u>
-augroup END
-" }}}
-
-" taboo {{{
-Plugin 'gcmt/taboo.vim'
-" }}}
-
-" vim-togglecursor {{{
-Plugin 'jszakmeister/vim-togglecursor'
-" }}}
-
-" vim-qml {{{
-Plugin 'peterhoeg/vim-qml'
-" }}}
-
-" supertab {{{
-Plugin 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-" }}}
-
-" vim-wordmotion {{{
-Plugin 'chaoren/vim-wordmotion'
-let g:wordmotion_prefix = '<Leader>'
-" }}}
-
-" Defx {{{
-Plugin 'Shougo/defx.nvim'
-
-" Do not load netrw plugin
-let g:loaded_netrw = 1
-let g:netrw_loaded_netrwPlugin = 1
-
-nnoremap <silent> - :Defx `expand('%:p:h')` -search=`expand('%:p')`<cr>
-nnoremap <silent> <leader>ex :Defx<cr>
-
-augroup defx
-    autocmd!
-    au VimEnter * :call OpenExplorerIfNeeded(expand('<amatch>'))
-augroup END
-
-function! OpenExplorerIfNeeded(file)
-    if a:file == ""
-        execute 'Defx'
-    elseif IsDir(a:file)
-        execute 'Defx' a:file
-    endif
-endfunction
-
-function! IsDir(dir)
-    return !empty(a:dir) && isdirectory(a:dir)
-endfunction
-
-" }}}
-
-" thrift {{{
-Plugin 'solarnz/thrift.vim'
-" }}}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on   " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-" }}}
-
-set t_Co=256
+filetype plugin indent on
 syntax on
 colorscheme Tomorrow-Night
 
 " Enable mouse support
 set mouse=a
 
-if has('nvim')
-    let g:python_host_prog  = '/usr/bin/python3.6'
-    let g:python3_host_prog = '/usr/bin/python3.6'
-else
-    set ttymouse=xterm2
-endif
-
-set hlsearch
-nohlsearch " Don't highlight last search when .vimrc reloaded
-
 set colorcolumn=80
 
 " Keep more info in memory to speed things up
 set hidden
-set history=100
 
-set nobackup       " no backup files
-set nowritebackup  " only in case you don't want a backup file while editing
-set noswapfile     " no swap files
+set nobackup        " no backup files
+set nowritebackup   " only in case you don't want a backup file while editing
+set noswapfile      " no swap files
 
 " Have some logic when indenting
 set nowrap
@@ -215,34 +59,16 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set autoindent
-set showcmd		    " display incomplete commands
-set incsearch		" do incremental searching
-
 set diffopt=filler,vertical
-set belloff=all     " disable beeping
 
 " Folding options {{{
 set foldmethod=marker
 set foldcolumn=0
 set foldlevel=0
 " }}}
-
+"
 " Show matching parenthesis
 set showmatch
-
-" Always show the statusline
-set laststatus=2
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-set backupdir=./.backup,.,/tmp
-set directory=.,./.backup,/tmp
-
-" Set the codepages changing order
-set ffs=unix,dos,mac
-set fencs=utf-8,cp1251,koi8-r,ucs-2,cp866
 
 " Set keymaps
 set keymap=russian-jcuken
@@ -251,72 +77,8 @@ set imsearch=0
 
 set completeopt=menu,noinsert,noselect
 
-let maplocalleader=","
-
-" C file settings {{{
-augroup c_files
-    autocmd!
-    autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
-    autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
-    autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
-    autocmd FileType c setlocal syntax=c.doxygen
-augroup END
-" }}}
-
-" Cxx file settings {{{
-augroup cxx_files
-    autocmd!
-    autocmd FileType cpp noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
-    autocmd FileType cpp noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
-    autocmd FileType cpp setlocal syntax=cpp.doxygen
-augroup END
-" }}}
-
-" Files with #-comments {{{
-augroup hash_comments
-    autocmd!
-    autocmd FileType python,sh,cmake noremap <buffer> <localleader>/ :s/\(^\s*\)/\1# /<cr>:noh<cr>
-    autocmd FileType python,sh,cmake noremap <silent> <buffer> <localleader>\ :s/\(\s*\)#\s*/\1/<cr>:noh<cr>
-augroup END
-" }}}
-
-" Vimscript file settings {{{
-augroup vim_files
-    autocmd!
-    autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
-    autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
-    autocmd FileType vim inoremap <buffer> " "
-augroup END
-" }}}
-
-" Markdown settings {{{
-augroup md_files
-    autocmd!
-    autocmd FileType markdown setlocal textwidth=79
-    autocmd FileType markdown setlocal formatoptions-=l
-    autocmd FileType markdown setlocal spell spelllang=en,ru,fr
-augroup END
-" }}}
-
-" QML settings {{{
-augroup qml_files
-    autocmd!
-    autocmd FileType qml noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
-    autocmd FileType qml noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
-    autocmd FileType qml setlocal nosmartindent
-    autocmd FileType qml setlocal number
-augroup END
-" }}}
-
-" Custom syntax settings {{{
-augroup syntax
-    autocmd!
-    " Consider all .redmine files as Redmine wiki files.
-    autocmd BufNewFile,BufRead *.textile,*.redmine setlocal syntax=textile
-augroup END
-" Bash syntax by default
-let g:is_bash=1
-" }}}
+" Close a split window without resizing other windows
+set noequalalways
 
 " Mappings {{{
 
@@ -336,7 +98,6 @@ inoremap ( ()<left>
 inoremap [ []<left>
 inoremap ' ''<left>
 inoremap " ""<left>
-
 
 " Movements while typing
 inoremap <c-l> <right>
@@ -360,9 +121,6 @@ onoremap p i(
 nnoremap <silent><leader>m :wa<cr>:make!<cr>
 nnoremap <silent><leader>mc :make! clean<cr>
 
-" Change dir to a current file
-nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
-
 " Make it easier to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -382,44 +140,9 @@ nnoremap <silent> <C-W>- :exe "resize -5"<CR>
 " Maximize window
 nnoremap <C-W>z <C-W>\| <C-W>_
 
-" }}}
+" Help
+nnoremap <silent> <localleader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 
-" Cscope settings {{{
-if has('cscope')
-    "" Use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-    set cscopetag
-
-    if has('quickfix')
-        set cscopequickfix=s-,c-,d-,i-,t-,e-
-    endif
-
-    " Check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set csto=0
-
-    " show msg when any other cscope db added
-    set cscopeverbose
-
-    " To do the first type of search, hit 'CTRL-\', followed by one of the
-    " cscope search types above (s,g,c,t,e,f,i,d).
-    "
-    nnoremap <C-\>s :lcs find s <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>g :lcs find g <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>c :lcs find c <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>t :lcs find t <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>e :lcs find e <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-\>f :lcs find f <C-R>=expand("<cfile>")<CR><CR>
-    nnoremap <C-\>i :lcs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-\>d :lcs find d <C-R>=expand("<cword>")<CR><CR>
-
-    function! CScopeSearch()
-        call inputsave()
-        let keyword = input('Search for: ')
-        call inputrestore()
-        execute 'cs find g' keyword
-    endfunction
-    nnoremap <silent><leader>cs :call CScopeSearch()<cr>
-endif
 " }}}
 
 " Highligting settings {{{
@@ -429,51 +152,89 @@ highlight YcmErrorSign guibg=bg ctermbg=bg
 highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
-" Eliminating delays on ESC in vim and tmux {{{
-set timeoutlen=1000 ttimeoutlen=0
+" File settings {{{
+
+" C file settings {{{
+augroup c_files
+    autocmd!
+    autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
+    autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
+    autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
+    autocmd FileType c setlocal syntax=c.doxygen
+    autocmd FileType c setlocal number
+augroup END
 " }}}
 
-" Denite settings {{{
-call denite#custom#option('_', { 'split': 'no', 'mode': 'normal' })
+" Cxx file settings {{{
+augroup cxx_files
+    autocmd!
+    autocmd FileType cpp noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType cpp noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType cpp setlocal syntax=cpp.doxygen
+    autocmd FileType cpp setlocal number
+augroup END
+" }}}
 
-if executable('fd')
-    call denite#custom#var('grep', 'command', ['fd', '', '-L', '-t', 'f', '-x', 'grep'])
-    call denite#custom#var('grep', 'default_opts', ['-nH'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'separator', [';'])
-endif
+" Files with #-comments {{{
+augroup hash_comments
+    autocmd!
+    autocmd FileType python,sh,cmake noremap <buffer> <localleader>/ :s/^/#/<cr>:noh<cr>
+    autocmd FileType python,sh,cmake noremap <silent> <buffer> <localleader>\ :s/^#//<cr>:noh<cr>
+augroup END
+" }}}
 
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
+" Vimscript file settings {{{
+augroup vim_files
+    autocmd!
+    autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
+    autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
+    autocmd FileType vim inoremap <buffer> " "
+augroup END
+" }}}
+
+" Markdown settings {{{
+augroup md_files
+    autocmd!
+    autocmd FileType markdown setlocal textwidth=79
+    autocmd FileType markdown setlocal formatoptions-=l
+augroup END
+" }}}
+
+" QML settings {{{
+augroup qml_files
+    autocmd!
+    autocmd FileType qml noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType qml noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType qml setlocal nosmartindent
+    autocmd FileType qml setlocal number
+augroup END
+" }}}
+
+" plantuml settings {{{
+augroup qml_files
+    autocmd!
+    autocmd FileType plantuml call s:plantuml_settings()
+    autocmd FileType plantuml inoremap <buffer> ' '
+    autocmd FileType plantuml inoremap <buffer> [ [
+augroup END
+
+function! s:plantuml_settings() abort
+    nnoremap <silent><buffer> <leader>u :w<cr>:silent !plantuml -output /tmp %<cr>
+    nnoremap <silent><buffer> <leader>v :silent !xdg-open /tmp/%:r.png &<cr>
 endfunction
+
+" Make
+nnoremap <silent><leader>m :wa<cr>:make!<cr>
+nnoremap <silent><leader>mc :make! clean<cr>
+
 " }}}
 
-" Deoplete settings {{{
-" Set a single option
-call deoplete#custom#option('auto_complete_delay', 200)
-
-" Pass a dictionary to set multiple options
-call deoplete#custom#option({
-    \ 'auto_complete': v:true,
-    \ 'auto_complete_delay': 500,
-    \ 'smart_case': v:true,
-    \ })
 " }}}
 
-" Defx settings {{{
+" Plugins settings {{{
+
+" Defx {{{
+
 call defx#custom#column('icon', {
       \ 'directory_icon': '▸',
       \ 'opened_icon': '▾',
@@ -490,45 +251,151 @@ call defx#custom#column('mark', {
       \ 'selected_icon': '✓',
       \ })
 
-autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
-  " Define mappings
-  nnoremap <silent><buffer><expr> <CR>      defx#do_action('open')
-  nnoremap <silent><buffer><expr> c         defx#do_action('copy')
-  nnoremap <silent><buffer><expr> m         defx#do_action('move')
-  nnoremap <silent><buffer><expr> p         defx#do_action('paste')
-  nnoremap <silent><buffer><expr> l         defx#do_action('open')
-  nnoremap <silent><buffer><expr> t         defx#do_action('open_or_close_tree')
-  "nnoremap <silent><buffer><expr> E         defx#do_action('open', 'vsplit')
-  "nnoremap <silent><buffer><expr> P         defx#do_action('open', 'pedit')
-  nnoremap <silent><buffer><expr> K         defx#do_action('new_directory')
-  nnoremap <silent><buffer><expr> N         defx#do_action('new_file')
-  nnoremap <silent><buffer><expr> M         defx#do_action('new_multiple_files')
-  nnoremap <silent><buffer><expr> C         defx#do_action('toggle_columns', 'mark:filename:type:size:time')
-  nnoremap <silent><buffer><expr> S         defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> d         defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r         defx#do_action('rename')
-  nnoremap <silent><buffer><expr> !         defx#do_action('execute_command')
-  nnoremap <silent><buffer><expr> x         defx#do_action('execute_system')
-  nnoremap <silent><buffer><expr> yy        defx#do_action('yank_path')
-  nnoremap <silent><buffer><expr> .         defx#do_action('toggle_ignored_files')
-  nnoremap <silent><buffer><expr> ;         defx#do_action('repeat')
-  nnoremap <silent><buffer><expr> h         defx#do_action('cd', ['..'])
-  nnoremap <silent><buffer><expr> ~         defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q         defx#do_action('quit')
-  nnoremap <silent><buffer><expr> <Esc>     defx#do_action('quit')
-  nnoremap <silent><buffer><expr> <Space>   defx#do_action('toggle_select') . 'j'
-  nnoremap <silent><buffer><expr> *         defx#do_action('toggle_select_all')
-  nnoremap <silent><buffer><expr> j         line('.') == line('$') ? 'gg' : 'j'
-  nnoremap <silent><buffer><expr> k         line('.') == 1 ? 'G' : 'k'
-  nnoremap <silent><buffer><expr> <C-l>     defx#do_action('redraw')
-  nnoremap <silent><buffer><expr> <C-g>     defx#do_action('print')
-  nnoremap <silent><buffer><expr> cd        defx#do_action('change_vim_cwd')
+    " Define mappings
+    nnoremap <silent><buffer><expr> <CR>      defx#do_action('open')
+    nnoremap <silent><buffer><expr> c         defx#do_action('copy')
+    nnoremap <silent><buffer><expr> m         defx#do_action('move')
+    nnoremap <silent><buffer><expr> p         defx#do_action('paste')
+    nnoremap <silent><buffer><expr> l         defx#do_action('open')
+    nnoremap <silent><buffer><expr> t         defx#do_action('open_or_close_tree')
+    "nnoremap <silent><buffer><expr> E         defx#do_action('open', 'vsplit')
+    "nnoremap <silent><buffer><expr> P         defx#do_action('open', 'pedit')
+    nnoremap <silent><buffer><expr> K         defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> N         defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> M         defx#do_action('new_multiple_files')
+    nnoremap <silent><buffer><expr> C         defx#do_action('toggle_columns', 'mark:filename:type:size:time')
+    nnoremap <silent><buffer><expr> S         defx#do_action('toggle_sort', 'time')
+    nnoremap <silent><buffer><expr> d         defx#do_action('remove')
+    nnoremap <silent><buffer><expr> r         defx#do_action('rename')
+    nnoremap <silent><buffer><expr> !         defx#do_action('execute_command')
+    nnoremap <silent><buffer><expr> x         defx#do_action('execute_system')
+    nnoremap <silent><buffer><expr> yy        defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> .         defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> ;         defx#do_action('repeat')
+    nnoremap <silent><buffer><expr> h         defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~         defx#do_action('cd')
+    nnoremap <silent><buffer><expr> q         defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Esc>     defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Space>   defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> *         defx#do_action('toggle_select_all')
+    nnoremap <silent><buffer><expr> j         line('.') == line('$') ? 'gg' : 'j'
+    nnoremap <silent><buffer><expr> k         line('.') == 1 ? 'G' : 'k'
+    nnoremap <silent><buffer><expr> <C-l>     defx#do_action('redraw')
+    nnoremap <silent><buffer><expr> <C-g>     defx#do_action('print')
+    nnoremap <silent><buffer><expr> cd        defx#do_action('change_vim_cwd')
 endfunction
+
+augroup defx_config
+    autocmd!
+    autocmd FileType defx call s:defx_my_settings()
+augroup END
+
+nnoremap <silent> - :Defx `expand('%:p:h')` -search=`expand('%:p')`<cr>
+nnoremap <silent> <leader>ex :Defx<cr>
+
+" }}}
+
+" Denite {{{
+call denite#custom#option('_', { 'split': 'no', 'mode': 'normal' })
+
+if executable('fd')
+    call denite#custom#var('grep', 'command', ['fd', '', '-H', '-L', '-t', 'f', '-x', 'grep'])
+    call denite#custom#var('grep', 'default_opts', ['-nH'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'separator', [';'])
+endif
+
+augroup denite_config
+    autocmd!
+    autocmd FileType denite call s:denite_my_settings()
+augroup END
+
+function! s:denite_my_settings() abort
+    " Define mappings
+    nnoremap <silent><buffer><expr> <CR>    denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> d       denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p       denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q       denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i       denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+endfunction
+
+nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
+nnoremap <silent><leader>l :<C-u>Denite -split=no -buffer-name=buffer buffer<cr>
+nnoremap <silent><F3> :<C-u>Denite -split=no -buffer-name=grep grep<cr>
+nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep::-nH:<C-r>=expand("<cword>")<cr><cr>
+nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
+" }}}
+
+" Deoplete {{{
+
+" Enable on startup
+call deoplete#enable()
+
+" Set a single option
+call deoplete#custom#option('auto_complete_delay', 200)
+
+" Pass a dictionary to set multiple options
+call deoplete#custom#option({
+    \ 'auto_complete': v:true,
+    \ 'auto_complete_delay': 500,
+    \ 'smart_case': v:true,
+    \ })
+" }}}
+
+" Bclose {{{
+nnoremap <leader>bd :Bclose<CR>
+nnoremap <leader>bc :Bclose!<CR>
+" }}}
+
+" Tagbar {{{
+let tagbar_compact = 1
+let tagbar_autoclose = 1
+let tagbar_type_objc = {
+    \ 'ctagstype': 'ObjectiveC',
+    \ 'kinds' : [
+        \'M:macros',
+        \'t:types',
+        \'s:structures',
+        \'e:enumerations',
+        \'i:interface',
+        \'I:implementation',
+        \'p:properties',
+        \'m:methods',
+        \'c:class methods',
+        \'F:object fields',
+        \'f:functions'
+    \]
+    \}
+
+nnoremap <silent><leader>tb :TagbarToggle<CR>
+" }}}
+
+" vim-gfm-syntax {{{
+let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
+" }}}
+
+" vim-cpp-enhanced-highlight {{{
+let c_no_curly_error=1
+" }}}
+
+" vim-rtags {{{
+augroup vim_rtags
+    autocmd!
+    autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
+    autocmd FileType c,cpp inoremap <buffer> <C-Space> <C-x><C-u>
+augroup END
+" }}}
+
+" plantuml {{{
+let g:plantuml_set_makeprg = 0
+" }}}
+
 " }}}
 
 " Load .vim {{{
-if filereadable(".vim")
-    source .vim
+if filereadable("vimrc")
+    source vimrc
 endif
 " }}}
