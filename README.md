@@ -1,9 +1,10 @@
 # README
 
-1. Clone the repository to ~/.vim
-2. Install `Vundle.vim` as it is discribed at <https://github.com/VundleVim/Vundle.vim>. 
-3. Run `vim` and issue `:PluginInstall`.
-
-## MacVim support for thin strokes font with Retina
-
-    defaults write org.vim.MacVim AppleFontSmoothing -int 0
+1. Install `dein.vim` 
+```
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+# For example, we just use `~/.cache/dein` as installation directory
+sh ./installer.sh ~/.cache/dein
+```
+2. Clone the repository to `~/.config/nvim`
+3. Run `vim` and issue `:call dein#install()`
