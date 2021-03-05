@@ -25,7 +25,7 @@ if dein#load_state('~/.cache/dein')
     " Development
     call dein#add('tpope/vim-fugitive')
     call dein#add('octol/vim-cpp-enhanced-highlight',   {'on_ft': ['cpp']})
-    call dein#add('vgribov/vim-rtags',                  {'on_ft': ['c', 'cpp']})
+    call dein#add('vgribov/neo-rtags',                  {'on_ft': ['c', 'cpp']})
     call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
     call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
     call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
@@ -380,10 +380,9 @@ let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 let c_no_curly_error=1
 " }}}
 
-" vim-rtags {{{
-augroup vim_rtags
+" neo-rtags {{{
+augroup neo_rtags
     autocmd!
-    autocmd FileType c,cpp setlocal completefunc=RtagsCompleteFunc
     autocmd FileType c,cpp inoremap <buffer> <C-Space> <C-x><C-u>
 augroup END
 " }}}
