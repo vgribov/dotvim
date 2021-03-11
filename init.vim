@@ -25,10 +25,13 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-fugitive')
     call dein#add('octol/vim-cpp-enhanced-highlight',   {'on_ft': ['cpp']})
     call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
-    call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
-    call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
-    call dein#add('solarnz/thrift.vim',                 {'on_ft': ['thrift']})
+
+    " Syntax
     call dein#add('aklt/plantuml-syntax',               {'on_ft': ['plantuml']})
+    call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
+    call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
+    call dein#add('solarnz/thrift.vim',                 {'on_ft': ['thrift']})
+    call dein#add('kergoth/vim-bitbake',                {'on_ft': ['bitbake']})
 
     call dein#end()
     call dein#save_state()
