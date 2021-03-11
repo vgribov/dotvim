@@ -435,8 +435,8 @@ let g:plantuml_set_makeprg = 0
 
 " }}}
 
-" Load .vim {{{
-if filereadable("vimrc")
-    source vimrc
+" Load local config {{{
+if filereadable("config.vim")
+    source config.vim
 endif
 " }}}
