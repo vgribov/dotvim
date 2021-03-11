@@ -209,7 +209,7 @@ augroup END
 " }}}
 
 " plantuml settings {{{
-augroup qml_files
+augroup plantuml_files
     autocmd!
     autocmd FileType plantuml call s:plantuml_settings()
     autocmd FileType plantuml inoremap <buffer> ' '
@@ -220,12 +220,19 @@ function! s:plantuml_settings() abort
     nnoremap <silent><buffer> <leader>u :w<cr>:silent !plantuml -output /tmp %<cr>
     nnoremap <silent><buffer> <leader>v :silent !xdg-open /tmp/%:r.png &<cr>
 endfunction
+" }}}
+
+" Remove trailing spaces {{{
+augroup trailing_spaces
+    autocmd!
+    autocmd FileType c,cpp,python,sh,make,cmake,vim,plantuml
+                \ autocmd BufWritePre <buffer> %s/\s\+$//e
+augroup END
+" }}}
 
 " Make
 nnoremap <silent><leader>m :wa<cr>:make!<cr>
 nnoremap <silent><leader>mc :make! clean<cr>
-
-" }}}
 
 " }}}
 
