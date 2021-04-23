@@ -84,7 +84,7 @@ set noequalalways
 " Mappings {{{
 
 " Clear current search highlighting
-nnoremap <silent><c-l> :nohlsearch<cr>
+nnoremap <silent><esc> :nohlsearch<cr>
 
 " Buffers navigation
 nnoremap <C-^> :b!#<CR>
