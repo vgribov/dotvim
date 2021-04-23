@@ -307,12 +307,17 @@ nnoremap <silent> <leader>ex :Defx<cr>
 " Denite {{{
 call denite#custom#option('_', { 'split': 'no', 'mode': 'normal' })
 
-if executable('fd')
-    call denite#custom#var('grep', 'command', ['fd', '', '-H', '-L', '-t', 'f', '-x', 'grep'])
-    call denite#custom#var('grep', 'default_opts', ['-nH'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'separator', [';'])
-endif
+let search_cmd = $HOME . '/.config/nvim/bin/search'
+
+call denite#custom#var('file/rec', 'command', [ search_cmd ])
+
+call denite#custom#var('grep', {
+            \ 'command': [ search_cmd ],
+            \ 'default_opts': [],
+            \ 'recursive_opts': [],
+            \ 'pattern_opt': [],
+            \ 'separator': [],
+            \ })
 
 augroup denite_config
     autocmd!
@@ -332,7 +337,7 @@ endfunction
 nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
 nnoremap <silent><leader>l :<C-u>Denite -split=no -buffer-name=buffer buffer<cr>
 nnoremap <silent><F3> :<C-u>Denite -split=no -buffer-name=grep grep<cr>
-nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep::-nH:<C-r>=expand("<cword>")<cr><cr>
+nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep:::<C-r>=expand("<cword>")<cr><cr>
 nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
 " }}}
 
