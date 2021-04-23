@@ -21,10 +21,10 @@ if [[ $# == 1 ]]; then
     if [[ -d "$1" ]]; then
         _find
     else
-        _find | xargs -P $(nproc) grep -nHE "$1" 2>/dev/null
+        _find | xargs -P 4 grep -nHE "$1" 2>/dev/null
     fi
 elif [[ $# == 2 ]]; then
-    _find "$2" | xargs -P $(nproc) grep -nHE "$1" 2>/dev/null
+    _find "$2" | xargs -P 4 grep -nHE "$1" 2>/dev/null
 else
     _find
 fi
