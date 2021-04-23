@@ -124,7 +124,7 @@ nnoremap <silent><leader>mc :make! clean<cr>
 
 " Make it easier to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>r :source $MYVIMRC<cr>
 
 " Exit to normal mode in terminal window
 tnoremap <Esc> <C-\><C-n>
