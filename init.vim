@@ -10,36 +10,33 @@ endif
 " Add the dein installation directory into runtimepath
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('~/.cache/dein')
-    call dein#begin('~/.cache/dein')
+call dein#begin('~/.cache/dein')
 
-    " Shougo
-    call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-    call dein#add('Shougo/defx.nvim')
-    call dein#add('Shougo/denite.nvim')
+" Shougo
+call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+call dein#add('Shougo/defx.nvim')
+call dein#add('Shougo/denite.nvim')
 
-    " Basic
-    call dein#add('vadimr/bclose.vim',                  {'on_cmd': 'BClose'})
-    call dein#add('majutsushi/tagbar')
-    call dein#add('itchyny/lightline.vim')
-    call dein#add('gcmt/taboo.vim',                     {'on_cmd': 'TabooOpen'})
+" Basic
+call dein#add('vadimr/bclose.vim',                  {'on_cmd': 'BClose'})
+call dein#add('majutsushi/tagbar')
+call dein#add('itchyny/lightline.vim')
+call dein#add('gcmt/taboo.vim',                     {'on_cmd': 'TabooOpen'})
 
-    " Development
-    call dein#add('neovim/nvim-lspconfig')
-    call dein#add('tpope/vim-fugitive')
-    call dein#add('octol/vim-cpp-enhanced-highlight',   {'on_ft': ['cpp']})
-    call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
+" Development
+call dein#add('neovim/nvim-lspconfig')
+call dein#add('tpope/vim-fugitive')
+call dein#add('octol/vim-cpp-enhanced-highlight',   {'on_ft': ['cpp']})
+call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
 
-    " Syntax
-    call dein#add('aklt/plantuml-syntax',               {'on_ft': ['plantuml']})
-    call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
-    call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
-    call dein#add('solarnz/thrift.vim',                 {'on_ft': ['thrift']})
-    call dein#add('kergoth/vim-bitbake',                {'on_ft': ['bitbake']})
+" Syntax
+call dein#add('aklt/plantuml-syntax',               {'on_ft': ['plantuml']})
+call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
+call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
+call dein#add('solarnz/thrift.vim',                 {'on_ft': ['thrift']})
+call dein#add('kergoth/vim-bitbake',                {'on_ft': ['bitbake']})
 
-    call dein#end()
-    call dein#save_state()
-endif
+call dein#end()
 " }}}
 
 filetype plugin indent on
