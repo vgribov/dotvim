@@ -198,11 +198,18 @@ augroup END
 " }}}
 
 " Markdown settings {{{
+
+function! s:markdown_settings() abort
+    setlocal textwidth=79
+    setlocal formatoptions-=l
+endfunction
+
 augroup md_files
     autocmd!
-    autocmd FileType markdown setlocal textwidth=79
-    autocmd FileType markdown setlocal formatoptions-=l
+    autocmd FileType markdown call s:markdown_settings()
 augroup END
+
+let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'bash', 'qml', 'cmake']
 " }}}
 
 " QML settings {{{
@@ -371,10 +378,6 @@ let tagbar_type_objc = {
     \}
 
 nnoremap <silent><leader>tb :TagbarToggle<CR>
-" }}}
-
-" vim-gfm-syntax {{{
-let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'vim']
 " }}}
 
 " vim-cpp-enhanced-highlight {{{
