@@ -28,6 +28,7 @@ call dein#add('neovim/nvim-lspconfig')
 call dein#add('tpope/vim-fugitive')
 call dein#add('octol/vim-cpp-enhanced-highlight',   {'on_ft': ['cpp']})
 call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
+call dein#add('ericcurtin/CurtineIncSw.vim',        {'on_ft': ['c', 'cpp']})
 
 " Syntax
 call dein#add('aklt/plantuml-syntax',               {'on_ft': ['plantuml']})
@@ -159,6 +160,7 @@ highlight lCursor guifg=NONE guibg=Cyan
 " C file settings {{{
 augroup c_files
     autocmd!
+    autocmd FileType c nnoremap <buffer> <leader>h :call CurtineIncSw()<cr>
     autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
     autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
     autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
@@ -170,6 +172,7 @@ augroup END
 " Cxx file settings {{{
 augroup cxx_files
     autocmd!
+    autocmd FileType cpp nnoremap <buffer> <leader>h :call CurtineIncSw()<cr>
     autocmd FileType cpp noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
     autocmd FileType cpp noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
     autocmd FileType cpp setlocal syntax=cpp.doxygen
