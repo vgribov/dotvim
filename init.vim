@@ -1,10 +1,6 @@
 let mapleader      = ' '
 let maplocalleader = ','
 
-if has('mac')
-    let g:python3_host_prog = '/usr/local/opt/python@3/bin/python3'
-endif
-
 " Plugins {{{
 
 " Add the dein installation directory into runtimepath
