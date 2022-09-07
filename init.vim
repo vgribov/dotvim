@@ -312,15 +312,30 @@ nnoremap <silent> <leader>ex :Defx<cr>
 " }}}
 
 " Denite {{{
-call denite#custom#option('_', { 'split': 'no', 'mode': 'normal' })
+call denite#custom#option('_', { 'split': 'no' })
 
 let search_cmd = $HOME . '/.config/nvim/bin/search'
 
+" find
 call denite#custom#var('file/rec', 'command', [ search_cmd ])
 
+call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+call denite#custom#var('file/rec/git', 'command',
+            \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+" grep
 call denite#custom#var('grep', {
             \ 'command': [ search_cmd ],
             \ 'default_opts': [],
+            \ 'recursive_opts': [],
+            \ 'pattern_opt': [],
+            \ 'separator': [],
+            \ })
+
+call denite#custom#alias('source', 'grep/git', 'grep')
+call denite#custom#var('grep/git', {
+            \ 'command': [ 'git', 'grep' ],
+            \ 'default_opts': [ '-ne' ],
             \ 'recursive_opts': [],
             \ 'pattern_opt': [],
             \ 'separator': [],
@@ -341,11 +356,21 @@ function! s:denite_my_settings() abort
     nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
 endfunction
 
-nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
-nnoremap <silent><leader>l :<C-u>Denite -split=no -buffer-name=buffer buffer<cr>
-nnoremap <silent><F3> :<C-u>Denite -split=no -buffer-name=grep grep<cr>
-nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep:::<C-r>=expand("<cword>")<cr><cr>
-nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
+" nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
+
+if isdirectory(".git")
+    nnoremap <silent><C-r>      : <C-u>Denite -buffer-name=files file/rec/git<cr>
+    nnoremap <silent><leader>s  : <C-u>Denite -buffer-name=grep grep/git<cr>
+    nnoremap <silent><leader>s* : <C-u>Denite -buffer-name=grep grep/git:::<C-r>=expand("<cword>").'\\W'<cr><cr>
+else
+    nnoremap <silent><C-r>      : <C-u>Denite -buffer-name=files file/rec<cr>
+    nnoremap <silent><leader>s  : <C-u>Denite -buffer-name=grep grep<cr>
+    nnoremap <silent><leader>s* : <C-u>Denite -buffer-name=grep grep:::<C-r>=expand("<cword>").'\\W'<cr><cr>
+endif
+
+nnoremap <silent><leader>l : <C-u>Denite -buffer-name=buffer buffer<cr>
+nnoremap <silent><leader>. : <C-u>Denite -resume<cr>
+
 " }}}
 
 " bbye {{{
