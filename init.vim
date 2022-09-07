@@ -14,7 +14,7 @@ call dein#add('Shougo/defx.nvim')
 call dein#add('Shougo/denite.nvim')
 
 " Basic
-call dein#add('vadimr/bclose.vim',                  {'on_cmd': 'BClose'})
+call dein#add('moll/vim-bbye')
 call dein#add('majutsushi/tagbar')
 call dein#add('itchyny/lightline.vim')
 call dein#add('gcmt/taboo.vim',                     {'on_cmd': 'TabooOpen'})
@@ -348,9 +348,9 @@ nnoremap <silent><leader>s :<C-u>Denite -split=no -buffer-name=grep grep:::<C-r>
 nnoremap <silent><leader>. :<C-u>Denite -resume<cr>
 " }}}
 
-" Bclose {{{
-nnoremap <leader>bd :Bclose<CR>
-nnoremap <leader>bc :Bclose!<CR>
+" bbye {{{
+nnoremap <leader>bd :Bwipeout<CR>
+nnoremap <leader>bc :Bdelete<CR>
 " }}}
 
 " Tagbar {{{
