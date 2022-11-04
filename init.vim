@@ -166,6 +166,19 @@ augroup END
 " }}}
 
 " Cxx file settings {{{
+
+" Don't indent template
+function! CppNoTemplateIndent()
+    let l:cline_num = line('.')
+    let l:cline = getline(l:cline_num)
+    let l:pline_num = prevnonblank(l:cline_num - 1)
+    let l:pline = getline(l:pline_num)
+    if l:pline =~# '\s*template'
+      return indent(l:pline_num)
+    endif
+    return cindent('.')
+endfunction
+
 augroup cxx_files
     autocmd!
     autocmd FileType cpp nnoremap <buffer> <leader>h :call CurtineIncSw()<cr>
@@ -173,7 +186,7 @@ augroup cxx_files
     autocmd FileType cpp noremap <silent> <buffer> <leader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
     autocmd FileType cpp set number
     autocmd FileType cpp setlocal syntax=cpp.doxygen
-    autocmd FileType cpp setlocal number
+    autocmd FileType cpp setlocal indentexpr=CppNoTemplateIndent()
 augroup END
 " }}}
 
