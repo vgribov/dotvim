@@ -161,7 +161,7 @@ augroup c_files
     autocmd FileType c vnoremap <buffer> <leader>/ <esc>`<I/* <esc>`>A */<esc>
     autocmd FileType c noremap <silent> <buffer> <leader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
     autocmd FileType c setlocal syntax=c.doxygen
-    autocmd FileType c setlocal number
+    autocmd FileType c set number
 augroup END
 " }}}
 
