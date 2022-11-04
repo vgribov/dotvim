@@ -140,7 +140,7 @@ nnoremap <silent> <C-W>- :exe "resize -5"<CR>
 nnoremap <C-W>z <C-W>\| <C-W>_
 
 " Help
-nnoremap <silent> <localleader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
+nnoremap <silent> <leader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 
 " }}}
 
@@ -157,9 +157,9 @@ highlight lCursor guifg=NONE guibg=Cyan
 augroup c_files
     autocmd!
     autocmd FileType c nnoremap <buffer> <leader>h :call CurtineIncSw()<cr>
-    autocmd FileType c nnoremap <buffer> <localleader>/ I/* <esc>A */<esc>
-    autocmd FileType c vnoremap <buffer> <localleader>/ <esc>`<I/* <esc>`>A */<esc>
-    autocmd FileType c noremap <silent> <buffer> <localleader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
+    autocmd FileType c nnoremap <buffer> <leader>/ I/* <esc>A */<esc>
+    autocmd FileType c vnoremap <buffer> <leader>/ <esc>`<I/* <esc>`>A */<esc>
+    autocmd FileType c noremap <silent> <buffer> <leader>\ :s/\(\/\*\s\?\\|\s\?\*\/\)//g<cr>:noh<cr>
     autocmd FileType c setlocal syntax=c.doxygen
     autocmd FileType c setlocal number
 augroup END
@@ -169,8 +169,9 @@ augroup END
 augroup cxx_files
     autocmd!
     autocmd FileType cpp nnoremap <buffer> <leader>h :call CurtineIncSw()<cr>
-    autocmd FileType cpp noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
-    autocmd FileType cpp noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType cpp noremap <buffer> <leader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType cpp noremap <silent> <buffer> <leader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType cpp set number
     autocmd FileType cpp setlocal syntax=cpp.doxygen
     autocmd FileType cpp setlocal number
 augroup END
@@ -179,16 +180,16 @@ augroup END
 " Files with #-comments {{{
 augroup hash_comments
     autocmd!
-    autocmd FileType python,sh,cmake noremap <buffer> <localleader>/ :s/^/#/<cr>:noh<cr>
-    autocmd FileType python,sh,cmake noremap <silent> <buffer> <localleader>\ :s/^#//<cr>:noh<cr>
+    autocmd FileType python,sh,cmake noremap <buffer> <leader>/ :s/^/#/<cr>:noh<cr>
+    autocmd FileType python,sh,cmake noremap <silent> <buffer> <leader>\ :s/^#//<cr>:noh<cr>
 augroup END
 " }}}
 
 " Vimscript file settings {{{
 augroup vim_files
     autocmd!
-    autocmd FileType vim noremap <buffer> <localleader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
-    autocmd FileType vim noremap <silent> <buffer> <localleader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
+    autocmd FileType vim noremap <buffer> <leader>/ :s/\(^\s*\)/\1" /<cr>:noh<cr>
+    autocmd FileType vim noremap <silent> <buffer> <leader>\ :s/\(\s*\)"\s*/\1/<cr>:noh<cr>
     autocmd FileType vim inoremap <buffer> " "
 augroup END
 " }}}
@@ -211,8 +212,8 @@ let g:markdown_fenced_languages = ['c', 'cpp', 'python', 'bash', 'qml', 'cmake']
 " QML settings {{{
 augroup qml_files
     autocmd!
-    autocmd FileType qml noremap <buffer> <localleader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
-    autocmd FileType qml noremap <silent> <buffer> <localleader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType qml noremap <buffer> <leader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType qml noremap <silent> <buffer> <leader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
     autocmd FileType qml setlocal nosmartindent
     autocmd FileType qml setlocal number
 augroup END
