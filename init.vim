@@ -370,14 +370,12 @@ function! s:denite_my_settings() abort
     nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
 endfunction
 
-" nnoremap <silent><leader>f :<C-u>Denite -split=no -buffer-name=files file/rec<cr>
-
 if isdirectory(".git")
-    nnoremap <silent><C-r>      : <C-u>Denite -buffer-name=files file/rec/git<cr>
+    nnoremap <silent><leader>f  : <C-u>Denite -buffer-name=files file/rec/git<cr>
     nnoremap <silent><leader>s  : <C-u>Denite -buffer-name=grep grep/git<cr>
     nnoremap <silent><leader>s* : <C-u>Denite -buffer-name=grep grep/git:::<C-r>=expand("<cword>").'\\W'<cr><cr>
 else
-    nnoremap <silent><C-r>      : <C-u>Denite -buffer-name=files file/rec<cr>
+    nnoremap <silent><leader>f  : <C-u>Denite -buffer-name=files file/rec<cr>
     nnoremap <silent><leader>s  : <C-u>Denite -buffer-name=grep grep<cr>
     nnoremap <silent><leader>s* : <C-u>Denite -buffer-name=grep grep:::<C-r>=expand("<cword>").'\\W'<cr><cr>
 endif
