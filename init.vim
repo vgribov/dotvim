@@ -190,6 +190,15 @@ augroup cxx_files
 augroup END
 " }}}
 
+" Go file settings {{{
+augroup go_files
+    autocmd!
+    autocmd FileType go noremap <buffer> <leader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
+    autocmd FileType go noremap <silent> <buffer> <leader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
+    autocmd FileType go setlocal number
+augroup END
+" }}}
+
 " Files with #-comments {{{
 augroup hash_comments
     autocmd!
@@ -478,7 +487,7 @@ EOF
 
 augroup nvim-lspconfig
     autocmd!
-    autocmd FileType c,cpp,objc,objcpp,python inoremap <buffer> <C-Space> <C-x><C-o>
+    autocmd FileType c,cpp,objc,objcpp,python,go inoremap <buffer> <C-Space> <C-x><C-o>
 augroup END
 
 " }}}
