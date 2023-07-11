@@ -38,7 +38,7 @@ call dein#end()
 
 filetype plugin indent on
 syntax on
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Eighties
 
 " Enable mouse support
 set mouse=a
