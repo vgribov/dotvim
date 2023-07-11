@@ -197,9 +197,11 @@ augroup END
 " Go file settings {{{
 augroup go_files
     autocmd!
+    autocmd FileType go inoremap <buffer> ` ``<left>
     autocmd FileType go noremap <buffer> <leader>/ :s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>
     autocmd FileType go noremap <silent> <buffer> <leader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
     autocmd FileType go setlocal number
+    autocmd FileType go setlocal noexpandtab
 augroup END
 " }}}
 
