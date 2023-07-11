@@ -79,6 +79,9 @@ set completeopt=menu,noinsert,noselect
 " Close a split window without resizing other windows
 set noequalalways
 
+" Show hidden special symbols
+set list
+
 " Mappings {{{
 
 " Clear current search highlighting
@@ -145,9 +148,7 @@ nnoremap <silent> <leader>h :Man 3 <c-r>=expand('<cword>')<cr><cr>
 " }}}
 
 " Highligting settings {{{
-highlight NonText guifg=bg ctermfg=bg
 highlight VertSplit guibg=bg ctermbg=bg
-highlight YcmErrorSign guibg=bg ctermbg=bg
 highlight lCursor guifg=NONE guibg=Cyan
 " }}}
 
