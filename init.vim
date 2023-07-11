@@ -65,7 +65,10 @@ set foldmethod=marker
 set foldcolumn=0
 set foldlevel=0
 " }}}
-"
+
+" Automatically insert current comment leaders
+set formatoptions+=ro
+
 " Show matching parenthesis
 set showmatch
 
