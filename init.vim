@@ -57,7 +57,6 @@ set nowrap
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
 set diffopt=filler,vertical
 
 " Folding options {{{
