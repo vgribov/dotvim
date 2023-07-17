@@ -81,7 +81,8 @@ set completeopt=menu,noinsert,noselect
 " Close a split window without resizing other windows
 set noequalalways
 
-" Show hidden special symbols
+" Show indention guides
+set listchars=tab:\|\ 
 set list
 
 " Mappings {{{
