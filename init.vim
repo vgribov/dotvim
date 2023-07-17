@@ -263,7 +263,7 @@ endfunction
 " Remove trailing spaces {{{
 augroup trailing_spaces
     autocmd!
-    autocmd FileType c,cpp,python,sh,make,cmake,vim,plantuml
+    autocmd FileType c,cpp,python,sh,make,cmake,plantuml
                 \ autocmd BufWritePre <buffer> %s/\s\+$//e
 augroup END
 " }}}
