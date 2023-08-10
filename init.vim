@@ -27,11 +27,11 @@ call dein#add('hynek/vim-python-pep8-indent',       {'on_ft': ['python']})
 call dein#add('ericcurtin/CurtineIncSw.vim',        {'on_ft': ['c', 'cpp']})
 
 " Syntax
-call dein#add('aklt/plantuml-syntax',               {'on_ft': ['plantuml']})
-call dein#add('peterhoeg/vim-qml',                  {'on_ft': ['qml']})
-call dein#add('rhysd/vim-gfm-syntax',               {'on_ft': ['markdown']})
-call dein#add('solarnz/thrift.vim',                 {'on_ft': ['thrift']})
-call dein#add('kergoth/vim-bitbake',                {'on_ft': ['bitbake']})
+call dein#add('aklt/plantuml-syntax')
+call dein#add('peterhoeg/vim-qml')
+call dein#add('rhysd/vim-gfm-syntax')
+call dein#add('solarnz/thrift.vim')
+call dein#add('kergoth/vim-bitbake')
 
 call dein#end()
 " }}}
