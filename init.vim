@@ -251,6 +251,8 @@ augroup END
 " }}}
 
 " plantuml settings {{{
+let g:plantuml_set_makeprg = 0
+
 augroup plantuml_files
     autocmd!
     autocmd FileType plantuml call s:plantuml_settings()
@@ -259,8 +261,16 @@ augroup plantuml_files
 augroup END
 
 function! s:plantuml_settings() abort
-    nnoremap <silent><buffer> <leader>u :w<cr>:silent !plantuml -output /tmp %<cr>
-    nnoremap <silent><buffer> <leader>v :silent !xdg-open /tmp/%:r.png &<cr>
+    if has("mac")
+        let l:open_cmd = "open"
+    else
+        let l:open_cmd = "xdg-open"
+    endif
+
+    exec 'nnoremap <silent><buffer> <leader>v'
+        \ . ' :w<cr>:silent'
+        \ . ' !plantuml -output /tmp % && '
+        \ . l:open_cmd . ' /tmp/%:t:r.png &<cr>'
 endfunction
 " }}}
 
@@ -440,10 +450,6 @@ augroup nvim-lspconfig
 augroup END
 
 luafile <sfile>:p:h/lsp.lua
-" }}}
-
-" plantuml {{{
-let g:plantuml_set_makeprg = 0
 " }}}
 
 " }}}
