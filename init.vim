@@ -202,6 +202,7 @@ augroup go_files
     autocmd FileType go noremap <silent> <buffer> <leader>\ :s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>
     autocmd FileType go setlocal number
     autocmd FileType go setlocal noexpandtab
+    autocmd FileType go setlocal colorcolumn=120
 
     autocmd BufWritePre *.go lua vim.lsp.buf.format()
 augroup END
