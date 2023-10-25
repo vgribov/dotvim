@@ -2,6 +2,7 @@ local lspconfig = require('lspconfig')
 
 -- Setup language servers.
 lspconfig.clangd.setup {}
+lspconfig.perlls.setup {}
 lspconfig.pyright.setup {}
 lspconfig.gopls.setup {}
 
