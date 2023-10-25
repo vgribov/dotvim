@@ -211,8 +211,8 @@ augroup END
 " Files with #-comments {{{
 augroup hash_comments
     autocmd!
-    autocmd FileType python,sh,cmake noremap <buffer> <leader>/ :s/^/#/<cr>:noh<cr>
-    autocmd FileType python,sh,cmake noremap <silent> <buffer> <leader>\ :s/^#//<cr>:noh<cr>
+    autocmd FileType perl,python,sh,cmake noremap <buffer> <leader>/ :s/^/#/<cr>:noh<cr>
+    autocmd FileType perl,python,sh,cmake noremap <silent> <buffer> <leader>\ :s/^#//<cr>:noh<cr>
 augroup END
 " }}}
 
@@ -277,7 +277,7 @@ endfunction
 " Remove trailing spaces {{{
 augroup trailing_spaces
     autocmd!
-    autocmd FileType c,cpp,python,sh,make,cmake,plantuml
+    autocmd FileType c,cpp,perl,python,sh,make,cmake,plantuml
                 \ autocmd BufWritePre <buffer> %s/\s\+$//e
 augroup END
 " }}}
