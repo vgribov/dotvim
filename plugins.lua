@@ -67,8 +67,8 @@ local function Denite(src)
     vim.fn['denite#helper#call_denite']('Denite', src, 0, 0)
 end
 
-keymap.set("n", "<leader>f", function()
-    Denite(denite_find_src())
+keymap.set("n", "<leader>k", function()
+    Denite('-start-filter ' .. denite_find_src())
 end, { silent = true })
 
 keymap.set("n", "<leader>s", function()
