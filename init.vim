@@ -33,6 +33,9 @@ call dein#add('rhysd/vim-gfm-syntax')
 call dein#add('solarnz/thrift.vim')
 call dein#add('kergoth/vim-bitbake')
 
+" Misc
+call dein#add('godlygeek/tabular')
+
 call dein#end()
 " }}}
 

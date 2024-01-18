@@ -241,3 +241,8 @@ api.nvim_create_autocmd("LspAttach", {
 })
 
 -- }}}
+
+-- Tabularize {{{
+keymap.set({"v", "n"}, "<leader>a=", ":Tabularize /=<cr>",    { silent = true })
+keymap.set({"v", "n"}, "<leader>a:", ":Tabularize /:\zs<cr>", { silent = true })
+-- }}}
