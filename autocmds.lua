@@ -87,6 +87,7 @@ api.nvim_create_autocmd("FileType", {
         keymap.set("i", "<C-Space>", "<C-x><C-o>", opts)
 
         vim.b.load_doxygen_syntax = true
+        vim.bo.cinoptions = "g0,l1,L0,:0,N-s,(0"
         vim.bo.indentexpr = "v:lua.cpp_indent()"
 
         api.nvim_create_autocmd("BufEnter", {
