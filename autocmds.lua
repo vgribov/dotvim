@@ -73,8 +73,9 @@ function cpp_indent()
     return vim.fn.cindent(cline_num)
 end
 
+local cxx_files = api.nvim_create_augroup("cxx_files", { clear = true })
 api.nvim_create_autocmd("FileType", {
-    group = api.nvim_create_augroup("cxx_files", { clear = true }),
+    group = cxx_files,
     pattern = "cpp",
 
     callback = function(args)
@@ -101,6 +102,12 @@ api.nvim_create_autocmd("FileType", {
             command = [[:%s/\s\+$//e"]]
         })
     end,
+})
+
+api.nvim_create_autocmd("BufEnter", {
+    group = cxx_files,
+    pattern = "*.cppm",
+    command = ":set filetype=cpp"
 })
 
 -- }}}
