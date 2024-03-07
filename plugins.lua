@@ -202,6 +202,7 @@ lspconfig.clangd.setup{}
 lspconfig.perlls.setup{}
 lspconfig.pyright.setup{}
 lspconfig.gopls.setup{}
+lspconfig.qmlls.setup{}
 
 -- Global mappings.
 keymap.set("n", "<leader>e", diagnostic.open_float)
