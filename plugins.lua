@@ -199,10 +199,11 @@ local lspconfig = require "lspconfig"
 
 -- Setup language servers.
 lspconfig.clangd.setup{}
+lspconfig.gopls.setup{}
 lspconfig.perlls.setup{}
 lspconfig.pyright.setup{}
-lspconfig.gopls.setup{}
 lspconfig.qmlls.setup{}
+lspconfig.rust_analyzer.setup{}
 
 -- Global mappings.
 keymap.set("n", "<leader>e", diagnostic.open_float)

@@ -150,6 +150,38 @@ api.nvim_create_autocmd("FileType", {
 
 -- }}}
 
+-- Rust file settings {{{
+
+api.nvim_create_autocmd("FileType", {
+    group = api.nvim_create_augroup("rust-files", { clear = true }),
+    pattern = "rust",
+
+    callback = function(args)
+        local opts = { buffer = args.buf, silent = true }
+        keymap.set({ "n", "v" },
+            "<leader>/", [[:s/\(^\s*\)/\1\/\/ /<cr>:noh<cr>]], opts)
+        keymap.set({ "n", "v" },
+            "<leader>\\", [[:s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>]], opts)
+        keymap.set("i", "<C-Space>", "<C-x><C-o>", opts)
+
+        api.nvim_create_autocmd("BufEnter", {
+            buffer = args.buf,
+            callback = function()
+                vim.wo.number    = true
+                vim.bo.textwidth = 90
+            end
+        })
+
+        -- Remove trailing spaces
+        api.nvim_create_autocmd("BufWritePre", {
+            buffer  = args.buf,
+            command = [[:%s/\s\+$//e"]]
+        })
+    end,
+})
+
+-- }}}
+
 -- Files with #-comments {{{
 
 api.nvim_create_autocmd("FileType", {
