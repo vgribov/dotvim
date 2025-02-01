@@ -245,6 +245,7 @@ api.nvim_create_autocmd("LspAttach", {
 -- }}}
 
 -- Tabularize {{{
-keymap.set({"v", "n"}, "<leader>a=", ":Tabularize /=<cr>",    { silent = true })
-keymap.set({"v", "n"}, "<leader>a:", ":Tabularize /:\zs<cr>", { silent = true })
+keymap.set({"v", "n"}, "<leader>a=", ":Tabularize /=<cr>",            { silent = true })
+keymap.set({"v", "n"}, "<leader>a:", ":Tabularize /:\zs<cr>",         { silent = true })
+keymap.set({"v", "n"}, "<leader>aa", ":Tabularize / [A-Za-z]/l0<cr>", { silent = true })
 -- }}}
