@@ -93,7 +93,10 @@ api.nvim_create_autocmd("FileType", {
 
         api.nvim_create_autocmd("BufEnter", {
             buffer   = args.buf,
-            callback = function() vim.wo.number = true end
+            callback = function()
+                vim.wo.number    = true
+                vim.bo.textwidth = 90
+            end
         })
 
         -- Remove trailing spaces
