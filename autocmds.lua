@@ -182,6 +182,28 @@ api.nvim_create_autocmd("FileType", {
 
 -- }}}
 
+-- Python file settings {{{
+
+api.nvim_create_autocmd("FileType", {
+    group = api.nvim_create_augroup("python-files", { clear = true }),
+    pattern = "python",
+
+    callback = function(args)
+        local opts = { buffer = args.buf, silent = true }
+        keymap.set({ "n", "v" }, "<leader>/",  [[:s/^/#/<cr>:noh<cr>]], opts)
+        keymap.set({ "n", "v" }, "<leader>\\", [[:s/^#//<cr>:noh<cr>]], opts)
+        keymap.set("i", "<C-Space>", "<C-x><C-o>", opts)
+
+        -- Auto format on exit
+        api.nvim_create_autocmd("BufWritePre", {
+            buffer   = args.buf,
+            callback = function() vim.lsp.buf.format() end
+        })
+    end
+})
+
+-- }}}
+
 -- Files with #-comments {{{
 
 api.nvim_create_autocmd("FileType", {
