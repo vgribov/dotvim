@@ -130,6 +130,9 @@ api.nvim_create_autocmd("FileType", {
             "<leader>\\", [[:s/\(\s*\)\/\/\s*/\1/<cr>:noh<cr>]], opts)
         keymap.set("i", "<C-Space>", "<C-x><C-o>", opts)
 
+        keymap.set("n", "<leader>r", ":make run<cr>", opts)
+        keymap.set("n", "<leader>m", ":make<cr>", opts)
+
         api.nvim_create_autocmd("BufEnter", {
             buffer = args.buf,
             callback = function()
