@@ -194,6 +194,16 @@ api.nvim_create_autocmd("FileType", {
         keymap.set({ "n", "v" }, "<leader>\\", [[:s/^#//<cr>:noh<cr>]], opts)
         keymap.set("i", "<C-Space>", "<C-x><C-o>", opts)
 
+        api.nvim_create_autocmd("BufEnter", {
+            buffer = args.buf,
+            callback = function()
+                vim.wo.spell = true
+                vim.wo.number = true
+                vim.wo.colorcolumn = "80"
+                vim.bo.textwidth = 100
+            end
+        })
+
         -- Auto format on exit
         api.nvim_create_autocmd("BufWritePre", {
             buffer   = args.buf,
