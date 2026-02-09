@@ -137,8 +137,9 @@ api.nvim_create_autocmd("FileType", {
             buffer = args.buf,
             callback = function()
                 vim.wo.number    = true
+                vim.wo.colorcolumn = "80"
                 vim.bo.expandtab = false
-                vim.bo.textwidth = 90
+                vim.bo.textwidth = 100
                 vim.bo.formatoptions = "jcroql"
             end
         })
