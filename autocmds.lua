@@ -336,3 +336,16 @@ api.nvim_create_autocmd("FileType", {
 })
 
 -- }}}
+
+-- terminal settings {{{
+
+api.nvim_create_autocmd({"TermOpen"}, {
+    group = api.nvim_create_augroup("terminal", { clear = true }),
+    pattern = "*",
+
+    callback = function()
+        vim.wo.spell = false
+    end
+})
+
+-- }}}
