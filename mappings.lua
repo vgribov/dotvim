@@ -23,7 +23,7 @@ keymap.set("i", "<c-z>", "<c-o>zz")
 
 -- Make it easier to edit .vimrc
 keymap.set("n", "<leader>ev", ":edit   $MYVIMRC<cr>", { silent = true })
-keymap.set("n", "<leader>r",  ":source $MYVIMRC<cr>", { silent = true })
+keymap.set("n", "<leader>sv", ":source $MYVIMRC<cr>", { silent = true })
 
 -- Terminal mappings
 keymap.set("n", "<leader>tr", ":15split<cr>:terminal<cr>", { silent = true })
