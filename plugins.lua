@@ -201,9 +201,11 @@ local lspconfig = require "lspconfig"
 lspconfig.clangd.setup{}
 lspconfig.gopls.setup{}
 lspconfig.perlls.setup{}
-lspconfig.pyright.setup{}
 lspconfig.qmlls.setup{}
 lspconfig.rust_analyzer.setup{}
+
+lspconfig.ruff.setup{}
+lspconfig.pyright.setup{}
 
 -- Global mappings.
 keymap.set("n", "<leader>e", diagnostic.open_float)
